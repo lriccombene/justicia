@@ -2,10 +2,10 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_DATABASE'],
-    'username' => 'root',
+    'dsn' => 'pgsql:host='.$_ENV['DB_HOST'].';port=5432;dbname='.$_ENV['DB_DATABASE'],
+    'username' => 'postgres',
     'password' => $_ENV['DB_PASSWORD'],
-    'charset' => 'utf8',
+  //  'charset' => '',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,

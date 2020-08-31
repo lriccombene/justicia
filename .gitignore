@@ -5,7 +5,7 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 .DS_Store
-mysqldata/*
+postgressqldata/*
 src/composer/*
 .vscode
 docker-compose.yml
