@@ -57,10 +57,12 @@ use app\assets\AppAsset;
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Usuarios', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin')],
+            ['label' => 'Mi Perfil', 'url' => ['/user/settings/account'], 'visible' => !Yii::$app->user->isGuest],
 
 
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/user/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -84,7 +86,7 @@ use app\assets\AppAsset;
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; SEPYDS <?= date('Y') ?></p>
+        <p class="pull-left">&copy; JUSTICIA <?= date('Y') ?></p>
 
 
     </div>

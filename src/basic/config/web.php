@@ -23,10 +23,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\Usuario',
-            'enableAutoLogin' => true,
-        ],
+      //  'user' => [
+        //    'identityClass' => 'app\models\Usuario',
+          //  'enableAutoLogin' => true,
+        //],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -61,12 +61,23 @@ $config = [
                 ],
             ],
         ],
+        'authManager' => [
+          'class' => 'Da\User\Component\AuthDbManagerComponent',
+        ],
 
     ],
     'modules' => [
         'apv1' => [
             'class' => 'app\modules\apv1\Apv1Module',
         ],
+        'user' => [
+            'class' => Da\User\Module::class,
+            'administrators' => ['admin'], //Listado de usuario que pueden acceder al panel de usuarios y roles
+            'enableRegistration' => false, //Los usuarios no pueden registrarse solos, tienen que ser generados
+            'enableEmailConfirmation' => false, //Al momento de la creación se envia un email
+            'allowUnconfirmedEmailLogin' => true, //Pueden iniciar sesión sin confirmar el email
+            'allowPasswordRecovery' => false, //Permitir recuperar la contraseña (Se necesita servidor de correo)
+        ]
     ],
     'params' => $params,
 ];
@@ -78,7 +89,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
-        'allowedIPs' => [ ($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
+        'allowedIPs' => [($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
     ];
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
@@ -86,7 +97,7 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
 
         //'allowedIPs' => ['127.0.0.1', '::1', '*'],
-        'allowedIPs' => [ ($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
+        'allowedIPs' => [($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
     ];
 }
 

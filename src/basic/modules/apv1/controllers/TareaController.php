@@ -13,6 +13,8 @@ use yii\rest\ActiveController;
  */
 class TareaController extends ActiveController
 {
+
+
     public $modelClass ="app\modules\apv1\models\Tarea";
 
     public function actions()

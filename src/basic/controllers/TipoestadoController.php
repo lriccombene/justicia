@@ -8,6 +8,7 @@ use app\models\TipoestadoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * TipoestadoController implements the CRUD actions for Tipoestado model.
@@ -17,17 +18,31 @@ class TipoestadoController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+     public function behaviors()
+     {
+         return [
+             'verbs' => [
+                 'class' => VerbFilter::className(),
+                 'actions' => [
+                     'delete' => ['POST'],
+                 ],
+             ],
+             'access' => [ //Definir el filtro de acceso
+                 'class' => AccessControl::className(),
+                 'rules' => [ //Definir politicas de acceso
+                     [
+                         'allow' => true,
+                         'roles' => ['admin', 'administrativo'], //El Rol admin y administrativo pueden acceder a todas las acciones
+                     ],
+                     [
+                         'allow' => true,
+                         'actions' => ['index', 'view'], //Ministro solo puede acceder al index y view
+                         'roles' => ['visitante'],
+                     ],
+                 ],
+             ],
+         ];
+     }
 
     /**
      * Lists all Tipoestado models.

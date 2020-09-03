@@ -9,7 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\models\Usuario;
+//use app\models\Usuario;
 
 AppAsset::register($this);
 ?>
@@ -29,12 +29,12 @@ AppAsset::register($this);
 
 
 <div> <?php
-    $banderita=FALSE;
+    $banderita=false;
     if(Yii::$app->user->isGuest ){}
     else{
         if(Yii::$app->user->identity->username === "admin")
         {
-            $banderita=TRUE;
+            $banderita=true;
         }
     }
 
@@ -61,9 +61,11 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Usuarios', 'url' => ['/user/admin'], 'visible' => $banderita],
+            ['label' => 'Mi Perfil', 'url' => ['/user/settings/account'], 'visible' => !Yii::$app->user->isGuest],
 
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/user/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -90,7 +92,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; SEPYDS <?= date('Y') ?></p>
+        <p class="pull-left">&copy; JUSTICIA  <?= date('Y') ?></p>
 
 
     </div>

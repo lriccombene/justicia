@@ -1,6 +1,6 @@
 <script type="text/x-template" id="crud-template">
     <div class="container">
-        <h1 class="text-capitalize">{{modelname}}</h1>
+        
         <!-- Button trigger modal -->
         <b-modal
                 @errors="errors"

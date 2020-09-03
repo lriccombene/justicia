@@ -26,8 +26,28 @@ $config = [
             ],
         ],
         'db' => $db,
-    ],
-    'params' => $params,
+          'authManager' => [ //Configuración RBAC
+              'class' => 'yii\rbac\DbManager',
+          ],
+      ],
+      'params' => $params,
+      'modules' => [
+          'user' => [
+              'class' => Da\User\Module::class,
+          ]
+      ],
+      'controllerMap' => [ //Añadir path de migraciones extras
+          'migrate' => [
+              'class' => \yii\console\controllers\MigrateController::class,
+              'migrationPath' => [
+                  '@app/migrations',
+                  '@yii/rbac/migrations',
+              ],
+              'migrationNamespaces' => [
+                  'Da\User\Migration',
+              ],
+          ],
+      ],
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.

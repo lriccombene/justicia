@@ -8,41 +8,63 @@ use app\models\InmuebleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * InmuebleController implements the CRUD actions for Inmueble model.
  */
 class InmuebleController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+  public function behaviors()
+  {
+      return [
+          'verbs' => [
+              'class' => VerbFilter::className(),
+              'actions' => [
+                  'delete' => ['POST'],
+              ],
+          ],
+          'access' => [ //Definir el filtro de acceso
+              'class' => AccessControl::className(),
+              'rules' => [ //Definir politicas de acceso
+                  [
+                      'allow' => true,
+                      'roles' => ['admin', 'administrativo'], //El Rol admin y administrativo pueden acceder a todas las acciones
+                  ],
+                  [
+                      'allow' => true,
+                      'actions' => ['index', 'view'], //Ministro solo puede acceder al index y view
+                      'roles' => ['visitante'],
+                  ],
+              ],
+          ],
+      ];
+  }
 
-    /**
-     * Lists all Inmueble models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new InmuebleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+ /**
+  * Lists all Tarea models.
+  * @return mixed
+  */
+ public function actionIndex()
+ {
+   /*  $searchModel = new TareaSearch();
+     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+     return $this->render('index', [
+         'searchModel' => $searchModel,
+         'dataProvider' => $dataProvider,
+     ]);*/
+     if (Yii::$app->user->isGuest) {
+          return $this->goHome();
+      }
+
+      $model = new Inmueble();
+      return $this->render('index',[
+          'model'=>$model,
+      ]);
+
+
+ }
 
     /**
      * Displays a single Inmueble model.
