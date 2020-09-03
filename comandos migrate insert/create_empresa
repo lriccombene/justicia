@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_empresa_table --fields="nombre:string:notNull,descripcion:string,id_consultor:integer:notNull:foreignKey(consultor),razon_social:string,contacto:string,referente:string"

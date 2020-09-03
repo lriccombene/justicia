@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_notassalida_table --fields="fec_emision:date,id_categoria:integer:notNull:foreignKey(categoria),id_empresa:integer:notNull:foreignKey(empresa),detalle:text,notificado:boolean,fec_notificado:date"

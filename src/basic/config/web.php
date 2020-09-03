@@ -15,13 +15,16 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '5cR5EalktG1uQkUnG9ivfLKP3Jvf5lDY',
+            'cookieValidationKey' => 'zmSgebsjBJucynP-Zq5wbIMgUdO10M5o',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Usuario',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -44,17 +47,30 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'rules' => [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => [
+                    'apv1/tarea',
+                    ],
+                ],
             ],
         ],
-        */
+
+    ],
+    'modules' => [
+        'apv1' => [
+            'class' => 'app\modules\apv1\Apv1Module',
+        ],
     ],
     'params' => $params,
 ];
+
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';

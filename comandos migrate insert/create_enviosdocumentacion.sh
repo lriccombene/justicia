@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_enviosdocumentacion_table --fields="fec:date,transporte:string,id_relevancia:integer:notNull:foreignKey(relevancia),detalle:text,archivo_urlnotificado:string,destino:string,fec_notificado:date"

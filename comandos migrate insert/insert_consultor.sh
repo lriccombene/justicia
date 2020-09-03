@@ -1,0 +1,11 @@
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Jose" apellido="Martin" email="josemartino@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Pedro" apellido="Mario" email="pedromario@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Lucas" apellido="Juan" email="juanlucas@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Ines" apellido="Fernandez" email="ines@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="tatina" apellido="Rulli" email="tatiana@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Eva" apellido="Pueblo" email="eva@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="Cristina" apellido="Argentina" email="cristina@gmail.com"
+
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="maria" apellido="Gonzalez" email="maria@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="cristian" apellido="jabibi" email="cristian@gmail.com"
+http -v POST http://127.0.0.1:8000/apv1/consultor/create nombre="walter" apellido="jabibi" email="walter@gmail.com"

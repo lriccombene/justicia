@@ -1,0 +1,3 @@
+sudo bin/yii.sh migrate/create create_actasinspeccion_table --fields="nro:integer:notNull,fec:date,id_localidad:integer:notNull:foreignKey(localidad),id_categoria:integer:notNull:foreignKey(categoria),id_motivo:integer:notNull:foreignKey(motivo),id_empresa:integer:notNull:foreignKey(empresa),id_area:integer:notNull:foreignKey(area),latitud:integer,longitud:integer"
+
+

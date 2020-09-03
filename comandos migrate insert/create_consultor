@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_consultor_table --fields="nombre:string:notNull,apellido:string,telefono:string,email:string,domicilio:string"

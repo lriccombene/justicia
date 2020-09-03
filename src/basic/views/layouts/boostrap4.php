@@ -56,6 +56,8 @@ use app\assets\AppAsset;
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
+
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_mesadeentrada_table --fields="fec:date:notNull,fec_ingreso:date,id_categoria:integer:notNull:foreignKey(categoria),id_tramite:integer:notNull:foreignKey(tipotramite),descripcion:text,id_empresa:integer:notNull:foreignKey(empresa)"

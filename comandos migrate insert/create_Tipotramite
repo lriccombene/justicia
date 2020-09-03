@@ -1,0 +1,1 @@
+sudo bin/yii.sh migrate/create create_tipotramite_table --fields="nombre:string:notNull,descripcion:string"
