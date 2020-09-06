@@ -58,6 +58,7 @@ $config = [
                     'controller' => [
                     'apv1/tarea',
                     'apv1/inmueble',
+                    'apv1/tipoestado',
                     ],
                 ],
             ],

@@ -48,16 +48,26 @@ class TipoestadoController extends Controller
      * Lists all Tipoestado models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new TipoestadoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+     public function actionIndex()
+     {
+       /*  $searchModel = new TareaSearch();
+         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+         return $this->render('index', [
+             'searchModel' => $searchModel,
+             'dataProvider' => $dataProvider,
+         ]);*/
+         if (Yii::$app->user->isGuest) {
+              return $this->goHome();
+          }
+
+          $model = new Tipoestado();
+          return $this->render('index',[
+              'model'=>$model,
+          ]);
+
+
+     }
 
     /**
      * Displays a single Tipoestado model.
