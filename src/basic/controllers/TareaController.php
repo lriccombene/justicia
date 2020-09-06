@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\filters\AccessControl;
+
 
 /**
  * TareaController implements the CRUD actions for Tarea model.
@@ -21,6 +21,7 @@ class TareaController extends Controller
      */
      public function behaviors()
      {
+      // var_dump('holaaa');
          return [
              'verbs' => [
                  'class' => VerbFilter::className(),

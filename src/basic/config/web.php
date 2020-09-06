@@ -57,6 +57,7 @@ $config = [
                     'pluralize' => false,
                     'controller' => [
                     'apv1/tarea',
+                    'apv1/inmueble',
                     ],
                 ],
             ],

@@ -56,7 +56,9 @@ use app\assets\AppAsset;
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Inmueble', 'url' => ['/inmueble/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Tipo Estado', 'url' => ['/tipoestado/index'],'visible'=>!Yii::$app->user->isGuest],
             ['label' => 'Usuarios', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin')],
             ['label' => 'Mi Perfil', 'url' => ['/user/settings/account'], 'visible' => !Yii::$app->user->isGuest],
 

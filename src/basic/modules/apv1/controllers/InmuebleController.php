@@ -3,19 +3,19 @@
 namespace app\modules\apv1\controllers;
 
 
-use app\modules\apv1\models\TareaSearch;
-use app\modules\apv1\models\Tarea;
+use app\modules\apv1\models\InmuebleSearch;
+use app\modules\apv1\models\Inmueble;
 use Yii;
 use yii\rest\ActiveController;
 
 /**
  * Default controller for the `apv1` module
  */
-class TareaController extends ActiveController
+class InmuebleController extends ActiveController
 {
 
 
-    public $modelClass ="app\modules\apv1\models\Tarea";
+    public $modelClass ="app\modules\apv1\models\Inmueble";
 
     public function actions()
     {
@@ -31,7 +31,7 @@ class TareaController extends ActiveController
 
     public function prepareDataProvider()
     {
-        $searchModel = new TareaSearch();
+        $searchModel = new InmuebleSearch();
         $dataProvider =  $searchModel->search(Yii::$app->request->queryParams);
         return $dataProvider;
     }
