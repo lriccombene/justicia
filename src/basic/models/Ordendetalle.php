@@ -13,10 +13,11 @@ use Yii;
  * @property string|null $fecinicio
  * @property string|null $fecfinal
  * @property string|null $observaciones
+ * @property int $id_ordentrabajo
  *
+ * @property Ordentrabajo $ordentrabajo
  * @property Tipoestado $tipoestado
- * @property Usuario $usuario
- * @property Ordentrabajo[] $ordentrabajos
+ * @property User $usuario
  */
 class Ordendetalle extends \yii\db\ActiveRecord
 {
@@ -34,13 +35,14 @@ class Ordendetalle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_tipoestado', 'id_usuario'], 'required'],
-            [['id_tipoestado', 'id_usuario'], 'default', 'value' => null],
-            [['id_tipoestado', 'id_usuario'], 'integer'],
+            [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'required'],
+            [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'default', 'value' => null],
+            [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'integer'],
             [['fecinicio', 'fecfinal'], 'safe'],
             [['observaciones'], 'string', 'max' => 255],
+            [['id_ordentrabajo'], 'exist', 'skipOnError' => true, 'targetClass' => Ordentrabajo::className(), 'targetAttribute' => ['id_ordentrabajo' => 'id']],
             [['id_tipoestado'], 'exist', 'skipOnError' => true, 'targetClass' => Tipoestado::className(), 'targetAttribute' => ['id_tipoestado' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
 
@@ -56,7 +58,18 @@ class Ordendetalle extends \yii\db\ActiveRecord
             'fecinicio' => 'Fecinicio',
             'fecfinal' => 'Fecfinal',
             'observaciones' => 'Observaciones',
+            'id_ordentrabajo' => 'Id Ordentrabajo',
         ];
+    }
+
+    /**
+     * Gets query for [[Ordentrabajo]].
+     *
+     * @return \yii\db\ActiveQuery|OrdentrabajoQuery
+     */
+    public function getOrdentrabajo()
+    {
+        return $this->hasOne(Ordentrabajo::className(), ['id' => 'id_ordentrabajo']);
     }
 
     /**
@@ -72,21 +85,11 @@ class Ordendetalle extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Usuario]].
      *
-     * @return \yii\db\ActiveQuery|UsuarioQuery
+     * @return \yii\db\ActiveQuery|UserQuery
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
-    }
-
-    /**
-     * Gets query for [[Ordentrabajos]].
-     *
-     * @return \yii\db\ActiveQuery|OrdentrabajoQuery
-     */
-    public function getOrdentrabajos()
-    {
-        return $this->hasMany(Ordentrabajo::className(), ['id_ordendetalle' => 'id']);
+        return $this->hasOne(User::className(), ['id' => 'id_usuario']);
     }
 
     /**

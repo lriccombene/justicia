@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Motivo]].
+ * This is the ActiveQuery class for [[Responsable]].
  *
- * @see Motivo
+ * @see Responsable
  */
-class MotivoQuery extends \yii\db\ActiveQuery
+class ResponsableQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class MotivoQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Motivo[]|array
+     * @return Responsable[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class MotivoQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Motivo|array|null
+     * @return Responsable|array|null
      */
     public function one($db = null)
     {

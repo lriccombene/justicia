@@ -7,9 +7,10 @@ use yii\db\Migration;
  * Has foreign keys to the tables:
  *
  * - `{{%tipoestado}}`
- * - `{{%usuario}}`
+ * - `{{%user}}`
+ * - `{{%ordentrabajo}}`
  */
-class m200831_220515_create_ordendetalle_table extends Migration
+class m200906_141230_create_ordendetalle_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -23,6 +24,7 @@ class m200831_220515_create_ordendetalle_table extends Migration
             'fecinicio' => $this->date(),
             'fecfinal' => $this->date(),
             'observaciones' => $this->string(),
+            'id_ordentrabajo' => $this->integer()->notNull(),
         ]);
 
         // creates index for column `id_tipoestado`
@@ -49,12 +51,29 @@ class m200831_220515_create_ordendetalle_table extends Migration
             'id_usuario'
         );
 
-        // add foreign key for table `{{%usuario}}`
+        // add foreign key for table `{{%user}}`
         $this->addForeignKey(
             '{{%fk-ordendetalle-id_usuario}}',
             '{{%ordendetalle}}',
             'id_usuario',
-            '{{%usuario}}',
+            '{{%user}}',
+            'id',
+            'CASCADE'
+        );
+
+        // creates index for column `id_ordentrabajo`
+        $this->createIndex(
+            '{{%idx-ordendetalle-id_ordentrabajo}}',
+            '{{%ordendetalle}}',
+            'id_ordentrabajo'
+        );
+
+        // add foreign key for table `{{%ordentrabajo}}`
+        $this->addForeignKey(
+            '{{%fk-ordendetalle-id_ordentrabajo}}',
+            '{{%ordendetalle}}',
+            'id_ordentrabajo',
+            '{{%ordentrabajo}}',
             'id',
             'CASCADE'
         );
@@ -77,7 +96,7 @@ class m200831_220515_create_ordendetalle_table extends Migration
             '{{%ordendetalle}}'
         );
 
-        // drops foreign key for table `{{%usuario}}`
+        // drops foreign key for table `{{%user}}`
         $this->dropForeignKey(
             '{{%fk-ordendetalle-id_usuario}}',
             '{{%ordendetalle}}'
@@ -86,6 +105,18 @@ class m200831_220515_create_ordendetalle_table extends Migration
         // drops index for column `id_usuario`
         $this->dropIndex(
             '{{%idx-ordendetalle-id_usuario}}',
+            '{{%ordendetalle}}'
+        );
+
+        // drops foreign key for table `{{%ordentrabajo}}`
+        $this->dropForeignKey(
+            '{{%fk-ordendetalle-id_ordentrabajo}}',
+            '{{%ordendetalle}}'
+        );
+
+        // drops index for column `id_ordentrabajo`
+        $this->dropIndex(
+            '{{%idx-ordendetalle-id_ordentrabajo}}',
             '{{%ordendetalle}}'
         );
 

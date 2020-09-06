@@ -17,7 +17,7 @@ class OrdentrabajoSearch extends Ordentrabajo
     public function rules()
     {
         return [
-            [['id', 'id_supervisor', 'id_inmueble', 'id_tarea', 'id_ordendetalle'], 'integer'],
+            [['id', 'id_supervisor', 'id_inmueble', 'id_tarea'], 'integer'],
             [['nro', 'fecinicio', 'descripcion', 'archivo'], 'safe'],
         ];
     }
@@ -48,7 +48,7 @@ class OrdentrabajoSearch extends Ordentrabajo
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $this->load($params,'');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -63,7 +63,6 @@ class OrdentrabajoSearch extends Ordentrabajo
             'id_inmueble' => $this->id_inmueble,
             'id_tarea' => $this->id_tarea,
             'fecinicio' => $this->fecinicio,
-            'id_ordendetalle' => $this->id_ordendetalle,
         ]);
 
         $query->andFilterWhere(['ilike', 'nro', $this->nro])

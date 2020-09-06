@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Motivo;
+use app\models\Responsable;
 
 /**
- * MotivoSearch represents the model behind the search form of `app\models\Motivo`.
+ * ResponsableSearch represents the model behind the search form of `app\models\Responsable`.
  */
-class MotivoSearch extends Motivo
+class ResponsableSearch extends Responsable
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class MotivoSearch extends Motivo
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nombre', 'descripcion'], 'safe'],
+            [['id', 'id_ordentrabrajo', 'id_usuario'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class MotivoSearch extends Motivo
      */
     public function search($params)
     {
-        $query = Motivo::find();
+        $query = Responsable::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +58,9 @@ class MotivoSearch extends Motivo
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'id_ordentrabrajo' => $this->id_ordentrabrajo,
+            'id_usuario' => $this->id_usuario,
         ]);
-
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

@@ -6,12 +6,11 @@ use yii\db\Migration;
  * Handles the creation of table `{{%ordentrabajo}}`.
  * Has foreign keys to the tables:
  *
- * - `{{%usuario}}`
+ * - `{{%user}}`
  * - `{{%inmueble}}`
  * - `{{%tarea}}`
- * - `{{%ordendetalle}}`
  */
-class m200831_220919_create_ordentrabajo_table extends Migration
+class m200906_141219_create_ordentrabajo_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -27,7 +26,6 @@ class m200831_220919_create_ordentrabajo_table extends Migration
             'fecinicio' => $this->date(),
             'descripcion' => $this->string(),
             'archivo' => $this->string(),
-            'id_ordendetalle' => $this->integer()->notNull(),
         ]);
 
         // creates index for column `id_supervisor`
@@ -37,12 +35,12 @@ class m200831_220919_create_ordentrabajo_table extends Migration
             'id_supervisor'
         );
 
-        // add foreign key for table `{{%usuario}}`
+        // add foreign key for table `{{%user}}`
         $this->addForeignKey(
             '{{%fk-ordentrabajo-id_supervisor}}',
             '{{%ordentrabajo}}',
             'id_supervisor',
-            '{{%usuario}}',
+            '{{%user}}',
             'id',
             'CASCADE'
         );
@@ -80,23 +78,6 @@ class m200831_220919_create_ordentrabajo_table extends Migration
             'id',
             'CASCADE'
         );
-
-        // creates index for column `id_ordendetalle`
-        $this->createIndex(
-            '{{%idx-ordentrabajo-id_ordendetalle}}',
-            '{{%ordentrabajo}}',
-            'id_ordendetalle'
-        );
-
-        // add foreign key for table `{{%ordendetalle}}`
-        $this->addForeignKey(
-            '{{%fk-ordentrabajo-id_ordendetalle}}',
-            '{{%ordentrabajo}}',
-            'id_ordendetalle',
-            '{{%ordendetalle}}',
-            'id',
-            'CASCADE'
-        );
     }
 
     /**
@@ -104,7 +85,7 @@ class m200831_220919_create_ordentrabajo_table extends Migration
      */
     public function safeDown()
     {
-        // drops foreign key for table `{{%usuario}}`
+        // drops foreign key for table `{{%user}}`
         $this->dropForeignKey(
             '{{%fk-ordentrabajo-id_supervisor}}',
             '{{%ordentrabajo}}'
@@ -137,18 +118,6 @@ class m200831_220919_create_ordentrabajo_table extends Migration
         // drops index for column `id_tarea`
         $this->dropIndex(
             '{{%idx-ordentrabajo-id_tarea}}',
-            '{{%ordentrabajo}}'
-        );
-
-        // drops foreign key for table `{{%ordendetalle}}`
-        $this->dropForeignKey(
-            '{{%fk-ordentrabajo-id_ordendetalle}}',
-            '{{%ordentrabajo}}'
-        );
-
-        // drops index for column `id_ordendetalle`
-        $this->dropIndex(
-            '{{%idx-ordentrabajo-id_ordendetalle}}',
             '{{%ordentrabajo}}'
         );
 

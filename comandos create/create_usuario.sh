@@ -1,1 +1,0 @@
-sudo bin/yii.sh migrate/create create_usuario_table --fields="username:string:notNull,name:string,password:string,id_rol:string,authKey:string,accessToken:string,id_rol:integer:notNull:foreignKey(rol)"

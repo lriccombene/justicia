@@ -38,10 +38,12 @@
             <tbody>
             <tr v-for="(model,key) in models" v-bind:key="model[modelfields[0]]">
                 <td>{{key+1}}</td>
-                    <td v-for="field in modelfields"> 
+                    <td v-for="field in modelfields">
                         <a v-if="model[field].nombre">{{model[field].nombre}}</a>
+                        <a v-else-if="model[field].username">{{model[field].username}}</a>
                         <a v-else>{{model[field]}}</a>
-                              
+
+
                     </td>
                 <td>
                     <button v-on:click="editModel(model[modelfields[0]])" type="button" class="btn btn-warning">Editar</button>
@@ -74,7 +76,7 @@
             model : Object,// aqui tenemos el objeto del modelo
             fields: {
                 type:Array,// aqui los campos que definimos mostrar
-                // default: Object.keys(model), 
+                // default: Object.keys(model),
             },
         },
         mounted() {
@@ -96,7 +98,7 @@
             }
         },
         methods: {
-            normalizeErrors: function(errors){// en este metodo acomodamos los errrores para que figuren de una marenra 
+            normalizeErrors: function(errors){// en este metodo acomodamos los errrores para que figuren de una marenra
                                               //correcta junto al campo
                 var allErrors = {};
                 for(var i = 0 ; i < errors.length; i++ ){
@@ -111,7 +113,7 @@
                     .then(function (response) {
                         // handle success
                         // console.log(response.data);
-                        //esta variable son utilizadas por el objeto paginacion 
+                        //esta variable son utilizadas por el objeto paginacion
                         self.pagination.total = response.headers['x-pagination-total-count'];
                         self.pagination.totalPages = response.headers['x-pagination-page-count'];
                         self.pagination.perPage = response.headers['x-pagination-per-page'];
@@ -126,7 +128,7 @@
                         // always executed
                     });
             },
-            deleteModel: function(id){ //aqui borramos el registro de la tabla atravez del boton borrar 
+            deleteModel: function(id){ //aqui borramos el registro de la tabla atravez del boton borrar
                 var self = this;
                 axios.delete('/apv1/'+self.modelname+'/'+id,{})
                     .then(function (response) {
@@ -149,9 +151,8 @@
                 var self = this; // nos re envia a la vista que crea obejeto del modelo
                 window.location.href = '/'+self.modelname+'/create';
             }
-            
+
 
         }
     }
 </script>
-

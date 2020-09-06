@@ -7,9 +7,9 @@ use yii\db\Migration;
  * Has foreign keys to the tables:
  *
  * - `{{%ordentrabajo}}`
- * - `{{%usuario}}`
+ * - `{{%user}}`
  */
-class m200831_221923_create_responsable_table extends Migration
+class m200906_141240_create_responsable_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -46,12 +46,12 @@ class m200831_221923_create_responsable_table extends Migration
             'id_usuario'
         );
 
-        // add foreign key for table `{{%usuario}}`
+        // add foreign key for table `{{%user}}`
         $this->addForeignKey(
             '{{%fk-responsable-id_usuario}}',
             '{{%responsable}}',
             'id_usuario',
-            '{{%usuario}}',
+            '{{%user}}',
             'id',
             'CASCADE'
         );
@@ -74,7 +74,7 @@ class m200831_221923_create_responsable_table extends Migration
             '{{%responsable}}'
         );
 
-        // drops foreign key for table `{{%usuario}}`
+        // drops foreign key for table `{{%user}}`
         $this->dropForeignKey(
             '{{%fk-responsable-id_usuario}}',
             '{{%responsable}}'

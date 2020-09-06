@@ -20,6 +20,7 @@ class OrdentrabajoController extends Controller
      */
      public function behaviors()
      {
+      // var_dump('holaaa');
          return [
              'verbs' => [
                  'class' => VerbFilter::className(),
@@ -32,7 +33,7 @@ class OrdentrabajoController extends Controller
                  'rules' => [ //Definir politicas de acceso
                      [
                          'allow' => true,
-                         'roles' => ['admin', 'administrativo'], //El Rol admin y administrativo pueden acceder a todas las acciones
+                         'roles' => ['admin', 'supervisor'], //El Rol admin y administrativo pueden acceder a todas las acciones
                      ],
                      [
                          'allow' => true,
@@ -43,20 +44,26 @@ class OrdentrabajoController extends Controller
              ],
          ];
      }
+
     /**
      * Lists all Ordentrabajo models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new OrdentrabajoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+     public function actionIndex()
+     {
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+         if (Yii::$app->user->isGuest) {
+              return $this->goHome();
+          }
+
+          $model = new Ordentrabajo();
+
+          return $this->render('index',[
+              'model'=>$model,
+          ]);
+
+
+     }
 
     /**
      * Displays a single Ordentrabajo model.
@@ -78,15 +85,39 @@ class OrdentrabajoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Ordentrabajo();
+      $model = new Ordentrabajo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+       if ($model->load(Yii::$app->request->post()) && $model->save()) {
+           return $this->redirect(['view', 'id' => $model->id]);
+       }
+       $hoy = date("Y");
+       $nro ='-'.$hoy;
+
+       $max = Ordentrabajo::find()
+          ->where(['like', 'nro',  '%'.$nro  , false])
+              ->select('id')->max('id');
+        if($max<>NULL){
+           $obj = $this->findModel($max);
+           $array = str_split($obj->nro, 6);
+           $ultimoanio=substr($array[1],1);;
+
+               $siguientenro=$array[0] + 1 ;
+               $largo=strlen($siguientenro);
+
+               $primeraparte='';
+               for ($i = 1; $i <= (6-$largo); $i++) {
+                 $primeraparte='0'. $primeraparte;
+               }
+               $model->nro =$primeraparte.$siguientenro.'-'.$hoy;
+
+        }else{
+           $model->nro ='000001'.$nro;
         }
+        //$array[0] + 1 ;
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+       return $this->render('create', [
+           'model' => $model,
+       ]);
     }
 
     /**

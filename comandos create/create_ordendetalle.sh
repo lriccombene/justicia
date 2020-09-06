@@ -1,1 +1,1 @@
-sudo bin/yii.sh migrate/create create_ordendetalle_table --fields="id_tipoestado:integer:notNull:foreignKey(tipoestado),id_usuario:integer:notNull:foreignKey(usuario),fecinicio:date,fecfinal:date,observaciones:string"
+sudo bin/yii.sh migrate/create create_ordendetalle_table --fields="id_tipoestado:integer:notNull:foreignKey(tipoestado),id_usuario:integer:notNull:foreignKey(user),fecinicio:date,fecfinal:date,observaciones:string,id_ordentrabajo:integer:notNull:foreignKey(ordentrabajo)"

@@ -4,12 +4,12 @@ namespace app\modules\apv1\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tipoestado;
+use app\models\User;
 
 /**
  * PostSearch represents the model behind the search form of `app\models\Post`.
  */
-class TipoestadoSearch extends \app\modules\apv1\models\Tipoestado
+class UserSearch extends \app\modules\apv1\models\User
 {
 
     public function fields()
@@ -51,7 +51,7 @@ class TipoestadoSearch extends \app\modules\apv1\models\Tipoestado
      */
     public function search($params)
     {
-        $query = Tipoestado::find();
+        $query = User::find();
 //        $query->joinWith('comments');
 
         // add conditions that should always apply here
@@ -70,8 +70,7 @@ class TipoestadoSearch extends \app\modules\apv1\models\Tipoestado
 
         // grid filtering conditions
         $query->andFilterWhere(['id' => $this->id]);
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['like', 'username', $this->username]);
 
         return $dataProvider;
     }

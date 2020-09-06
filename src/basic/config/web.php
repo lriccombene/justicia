@@ -59,6 +59,8 @@ $config = [
                     'apv1/tarea',
                     'apv1/inmueble',
                     'apv1/tipoestado',
+                    'apv1/ordentrabajo',
+                    'apv1/user',
                     ],
                 ],
             ],

@@ -17,7 +17,7 @@ class OrdendetalleSearch extends Ordendetalle
     public function rules()
     {
         return [
-            [['id', 'id_tipoestado', 'id_usuario'], 'integer'],
+            [['id', 'id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'integer'],
             [['fecinicio', 'fecfinal', 'observaciones'], 'safe'],
         ];
     }
@@ -48,7 +48,7 @@ class OrdendetalleSearch extends Ordendetalle
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $this->load($params,'');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -63,6 +63,7 @@ class OrdendetalleSearch extends Ordendetalle
             'id_usuario' => $this->id_usuario,
             'fecinicio' => $this->fecinicio,
             'fecfinal' => $this->fecfinal,
+            'id_ordentrabajo' => $this->id_ordentrabajo,
         ]);
 
         $query->andFilterWhere(['ilike', 'observaciones', $this->observaciones]);

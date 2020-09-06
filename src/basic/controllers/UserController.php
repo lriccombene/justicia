@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Usuario;
-use app\models\UsuarioSearch;
+use app\models\User;
+use app\models\userSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsuarioController implements the CRUD actions for Usuario model.
+ * UserController implements the CRUD actions for User model.
  */
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,15 +30,12 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Lists all Usuario models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $searchModel = new UsuarioSearch();
+        $searchModel = new userSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,60 +45,38 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Displays a single Usuario model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Usuario model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $model = new Usuario();
+        $model = new User();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            if($model->validate()){
-                $model->username = $_POST['Usuario']['username'];
-                $model->name = $_POST['Usuario']['name'];
-                $model->password = password_hash($_POST['Usuario']['username'],PASSWORD_BCRYPT);
-                $model->authKey = md5(random_bytes(5));
-                $model->accessToken= password_hash(random_bytes(5), PASSWORD_DEFAULT);
-                if($model->save()){
-                    return $this->redirect(['view','id'=>$model->id]);
-                }
-                else{
-                    $model->getErrors();           
-                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-        else{
-            $model->getErrors();
-        }
-       }
-            
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Usuario model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,9 +84,6 @@ class UsuarioController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -124,7 +96,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Deletes an existing Usuario model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -132,27 +104,21 @@ class UsuarioController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Usuario model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Usuario the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        if (($model = Usuario::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 

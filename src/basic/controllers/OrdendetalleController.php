@@ -20,6 +20,7 @@ class OrdendetalleController extends Controller
      */
      public function behaviors()
      {
+      // var_dump('holaaa');
          return [
              'verbs' => [
                  'class' => VerbFilter::className(),

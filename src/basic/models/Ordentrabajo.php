@@ -15,12 +15,11 @@ use Yii;
  * @property string|null $fecinicio
  * @property string|null $descripcion
  * @property string|null $archivo
- * @property int $id_ordendetalle
  *
+ * @property Ordendetalle[] $ordendetalles
  * @property Inmueble $inmueble
- * @property Ordendetalle $ordendetalle
  * @property Tarea $tarea
- * @property Usuario $supervisor
+ * @property User $supervisor
  * @property Responsable[] $responsables
  */
 class Ordentrabajo extends \yii\db\ActiveRecord
@@ -39,15 +38,14 @@ class Ordentrabajo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nro', 'id_supervisor', 'id_inmueble', 'id_tarea', 'id_ordendetalle'], 'required'],
-            [['id_supervisor', 'id_inmueble', 'id_tarea', 'id_ordendetalle'], 'default', 'value' => null],
-            [['id_supervisor', 'id_inmueble', 'id_tarea', 'id_ordendetalle'], 'integer'],
+            [['nro', 'id_supervisor', 'id_inmueble', 'id_tarea'], 'required'],
+            [['id_supervisor', 'id_inmueble', 'id_tarea'], 'default', 'value' => null],
+            [['id_supervisor', 'id_inmueble', 'id_tarea'], 'integer'],
             [['fecinicio'], 'safe'],
             [['nro', 'descripcion', 'archivo'], 'string', 'max' => 255],
             [['id_inmueble'], 'exist', 'skipOnError' => true, 'targetClass' => Inmueble::className(), 'targetAttribute' => ['id_inmueble' => 'id']],
-            [['id_ordendetalle'], 'exist', 'skipOnError' => true, 'targetClass' => Ordendetalle::className(), 'targetAttribute' => ['id_ordendetalle' => 'id']],
             [['id_tarea'], 'exist', 'skipOnError' => true, 'targetClass' => Tarea::className(), 'targetAttribute' => ['id_tarea' => 'id']],
-            [['id_supervisor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_supervisor' => 'id']],
+            [['id_supervisor'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_supervisor' => 'id']],
         ];
     }
 
@@ -65,8 +63,17 @@ class Ordentrabajo extends \yii\db\ActiveRecord
             'fecinicio' => 'Fecinicio',
             'descripcion' => 'Descripcion',
             'archivo' => 'Archivo',
-            'id_ordendetalle' => 'Id Ordendetalle',
         ];
+    }
+
+    /**
+     * Gets query for [[Ordendetalles]].
+     *
+     * @return \yii\db\ActiveQuery|OrdendetalleQuery
+     */
+    public function getOrdendetalles()
+    {
+        return $this->hasMany(Ordendetalle::className(), ['id_ordentrabajo' => 'id']);
     }
 
     /**
@@ -80,16 +87,6 @@ class Ordentrabajo extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Ordendetalle]].
-     *
-     * @return \yii\db\ActiveQuery|OrdendetalleQuery
-     */
-    public function getOrdendetalle()
-    {
-        return $this->hasOne(Ordendetalle::className(), ['id' => 'id_ordendetalle']);
-    }
-
-    /**
      * Gets query for [[Tarea]].
      *
      * @return \yii\db\ActiveQuery|TareaQuery
@@ -99,14 +96,18 @@ class Ordentrabajo extends \yii\db\ActiveRecord
         return $this->hasOne(Tarea::className(), ['id' => 'id_tarea']);
     }
 
+    public function getNro()
+    {
+        return 1111111;
+    }
     /**
      * Gets query for [[Supervisor]].
      *
-     * @return \yii\db\ActiveQuery|UsuarioQuery
+     * @return \yii\db\ActiveQuery|UserQuery
      */
     public function getSupervisor()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_supervisor']);
+        return $this->hasOne(User::className(), ['id' => 'id_supervisor']);
     }
 
     /**
