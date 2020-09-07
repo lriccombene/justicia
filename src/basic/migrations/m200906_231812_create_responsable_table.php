@@ -9,7 +9,7 @@ use yii\db\Migration;
  * - `{{%ordentrabajo}}`
  * - `{{%user}}`
  */
-class m200906_141240_create_responsable_table extends Migration
+class m200906_231812_create_responsable_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,22 +18,22 @@ class m200906_141240_create_responsable_table extends Migration
     {
         $this->createTable('{{%responsable}}', [
             'id' => $this->primaryKey(),
-            'id_ordentrabrajo' => $this->integer()->notNull(),
+            'id_ordentrabajo' => $this->integer()->notNull(),
             'id_usuario' => $this->integer()->notNull(),
         ]);
 
-        // creates index for column `id_ordentrabrajo`
+        // creates index for column `id_ordentrabajo`
         $this->createIndex(
-            '{{%idx-responsable-id_ordentrabrajo}}',
+            '{{%idx-responsable-id_ordentrabajo}}',
             '{{%responsable}}',
-            'id_ordentrabrajo'
+            'id_ordentrabajo'
         );
 
         // add foreign key for table `{{%ordentrabajo}}`
         $this->addForeignKey(
-            '{{%fk-responsable-id_ordentrabrajo}}',
+            '{{%fk-responsable-id_ordentrabajo}}',
             '{{%responsable}}',
-            'id_ordentrabrajo',
+            'id_ordentrabajo',
             '{{%ordentrabajo}}',
             'id',
             'CASCADE'
@@ -64,13 +64,13 @@ class m200906_141240_create_responsable_table extends Migration
     {
         // drops foreign key for table `{{%ordentrabajo}}`
         $this->dropForeignKey(
-            '{{%fk-responsable-id_ordentrabrajo}}',
+            '{{%fk-responsable-id_ordentrabajo}}',
             '{{%responsable}}'
         );
 
-        // drops index for column `id_ordentrabrajo`
+        // drops index for column `id_ordentrabajo`
         $this->dropIndex(
-            '{{%idx-responsable-id_ordentrabrajo}}',
+            '{{%idx-responsable-id_ordentrabajo}}',
             '{{%responsable}}'
         );
 

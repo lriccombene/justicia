@@ -51,13 +51,14 @@ class ResponsableController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ResponsableSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if (Yii::$app->user->isGuest) {
+           return $this->goHome();
+       }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+       $model = new Responsable();
+       return $this->render('index',[
+           'model'=>$model,
+       ]);
     }
 
     /**

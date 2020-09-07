@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "responsable".
  *
  * @property int $id
- * @property int $id_ordentrabrajo
+ * @property int $id_ordentrabajo
  * @property int $id_usuario
  *
- * @property Ordentrabajo $ordentrabrajo
+ * @property Ordentrabajo $ordentrabajo
  * @property User $usuario
  */
 class Responsable extends \yii\db\ActiveRecord
@@ -30,10 +30,10 @@ class Responsable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_ordentrabrajo', 'id_usuario'], 'required'],
-            [['id_ordentrabrajo', 'id_usuario'], 'default', 'value' => null],
-            [['id_ordentrabrajo', 'id_usuario'], 'integer'],
-            [['id_ordentrabrajo'], 'exist', 'skipOnError' => true, 'targetClass' => Ordentrabajo::className(), 'targetAttribute' => ['id_ordentrabrajo' => 'id']],
+            [['id_ordentrabajo', 'id_usuario'], 'required'],
+            [['id_ordentrabajo', 'id_usuario'], 'default', 'value' => null],
+            [['id_ordentrabajo', 'id_usuario'], 'integer'],
+            [['id_ordentrabajo'], 'exist', 'skipOnError' => true, 'targetClass' => Ordentrabajo::className(), 'targetAttribute' => ['id_ordentrabajo' => 'id']],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
@@ -45,19 +45,19 @@ class Responsable extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_ordentrabrajo' => 'Id Ordentrabrajo',
+            'id_ordentrabajo' => 'Id Ordentrabajo',
             'id_usuario' => 'Id Usuario',
         ];
     }
 
     /**
-     * Gets query for [[Ordentrabrajo]].
+     * Gets query for [[Ordentrabajo]].
      *
      * @return \yii\db\ActiveQuery|OrdentrabajoQuery
      */
-    public function getOrdentrabrajo()
+    public function getOrdentrabajo()
     {
-        return $this->hasOne(Ordentrabajo::className(), ['id' => 'id_ordentrabrajo']);
+        return $this->hasOne(Ordentrabajo::className(), ['id' => 'id_ordentrabajo']);
     }
 
     /**

@@ -58,6 +58,25 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     <span class="text-danger" v-if="errors.id_tarea" >{{errors.id_tarea}}</span>
 
   </div>
+
+  <div class="form-group">
+
+    <label for="supervisor">Responsable :</label>
+
+    <select v-model="selected_responsable" class="form-control" required >
+        <option v-for="option in supervisores" v-bind:value="option">
+                {{ option.username }}
+        </option>
+    </select>
+    <span class="text-danger" v-if="errors.id_responsable" >{{errors.id_responsable}}</span>
+    <button v-on:click ="agregarResponsable"  type ="button"  class="btn btn-success">Agregar</button>
+  </div>
+  <ul>
+      <li v-for='responsable in responsables'>{{responsable.username}}</li>
+
+  </ul>
+
+
   <div class="form-group">
           <label for="fecinicio">Fecha Inicio :</label>
           <input v-bind:placeholder="fecinicio_hint" class="form-control" id="fecinicio" v-model="fecinicio" type="date" name="fecinicio">
@@ -65,7 +84,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
   </div>
   <div class="form-group">
     <label for="descripcion">Descripcion :</label>
-    <input v-bind:placeholder="descripcion_hint" class="form-control" id="nro" v-model="descripcion" type="text" name="descrpcion" required >
+    <input v-bind:placeholder="descripcion_hint" class="form-control" id="nro" v-model="descripcion" type="textarea" name="descrpcion" required >
     <span class="text-danger" v-if="errors.descripcion" >{{errors.descripcion}}</span>
   </div>
 
@@ -74,6 +93,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     <input v-bind:placeholder="archivo_hint" class="form-control" id="nro" v-model="archivo" type="file" name="archivo" required >
     <span class="text-danger" v-if="errors.archivo" >{{errors.archivo}}</span>
   </div>
+
 
 
     <div class="row">
@@ -106,7 +126,9 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                         selected_inmueble: '<?php  echo ($model->id_inmueble); ?>',
                         tareas:[],
                         selected_tarea: '<?php  echo ($model->id_tarea); ?>',
-
+                        responsables:[],
+                        selected_responsable:'',
+                        nuevoResponsable:'',
                         errors: {}
 
                     },
@@ -190,10 +212,36 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            params.append('id_tarea', self.selected_tarea);
                            params.append('id_inmueble', self.selected_inmueble);
                            params.append('id_supervisor', self.selected_supervisor);
+                          // params.append('responsables', self.responsables);
                            axios.post('/apv1/ordentrabajo',params)
                               .then(function (response) {
                                   // handle success
                                   console.log(response.data);
+
+
+                                  for ( var prop in self.responsables) {
+                                      //item.id
+                                      //alert(self.responsables[prop].id+ '----'+ response.data.id);
+                                      const params2 = new URLSearchParams();
+                                      params2.append('id_ordentrabajo', response.data.id);
+                                      params2.append('id_usuario', self.responsables[prop].id);
+
+                                    // alert(params2);
+                                     // params.append('responsables', self.responsables);
+                                      axios.post('/apv1/responsable',params2)
+                                         .then(function (response2) {
+
+                                        //  alert(response2.data.id);
+                                         })
+                                         .catch(function (error2) {
+                                             // handle error
+                                             //alert(error2.response.data);
+                                             self.errors = self.normalizeErrors(error.response.data);
+                                         })
+                                         .then(function () {
+                                             // always executed
+                                         });
+                                  }
                                   alert('Los datos fueron guardados');
 
                               })
@@ -205,6 +253,17 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                               .then(function () {
                                   // always executed
                               });
+                      },
+                      addResponsable:function(idusu,idordentrabajo){
+
+                         var self = this;
+                         //alert(idusu+ '----'+ idordentrabajo);
+
+                    },
+                      agregarResponsable:function(){
+                          //alert('holaaaaa');
+                           var self = this;
+                           self.responsables.push(self.selected_responsable);
                       },
                       edit:function(id){
                            var self = this;

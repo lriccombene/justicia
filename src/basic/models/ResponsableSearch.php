@@ -17,7 +17,7 @@ class ResponsableSearch extends Responsable
     public function rules()
     {
         return [
-            [['id', 'id_ordentrabrajo', 'id_usuario'], 'integer'],
+            [['id', 'id_ordentrabajo', 'id_usuario'], 'integer'],
         ];
     }
 
@@ -47,7 +47,7 @@ class ResponsableSearch extends Responsable
             'query' => $query,
         ]);
 
-        $this->load($params,'');
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,7 +58,7 @@ class ResponsableSearch extends Responsable
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_ordentrabrajo' => $this->id_ordentrabrajo,
+            'id_ordentrabajo' => $this->id_ordentrabajo,
             'id_usuario' => $this->id_usuario,
         ]);
 

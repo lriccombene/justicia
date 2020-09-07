@@ -3,25 +3,25 @@
 namespace app\modules\apv1\controllers;
 
 
-use app\modules\apv1\models\UserSearch;
-use app\modules\apv1\models\User;
+use app\modules\apv1\models\ResponsableSearch;
+
 use Yii;
 use yii\rest\ActiveController;
 
 /**
  * Default controller for the `apv1` module
  */
-class UserController extends ActiveController
+class ResponsableController extends ActiveController
 {
 
 
-    public $modelClass ="app\modules\apv1\models\User";
+    public $modelClass ="app\modules\apv1\models\Responsable";
 
     public function actions()
     {
-        if (Yii::$app->user->isGuest) {
-            $this->redirect('../index.php');
-        }
+        //if (Yii::$app->user->isGuest) {
+      //      $this->redirect('../index.php');
+      //  }
 
         $actions = parent::actions();
         $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
@@ -31,7 +31,7 @@ class UserController extends ActiveController
 
     public function prepareDataProvider()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ResponsableSearch();
         $dataProvider =  $searchModel->search(Yii::$app->request->queryParams);
         return $dataProvider;
     }

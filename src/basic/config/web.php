@@ -61,6 +61,7 @@ $config = [
                     'apv1/tipoestado',
                     'apv1/ordentrabajo',
                     'apv1/user',
+                    'apv1/responsable',
                     ],
                 ],
             ],

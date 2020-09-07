@@ -9,11 +9,10 @@ use yii\data\ActiveDataProvider;
 /**
  * PostSearch represents the model behind the search form of `app\models\Post`.
  */
-class OrdentrabajoSearch extends \app\modules\apv1\models\Ordentrabajo
+class ResponsableSearch extends \app\modules\apv1\models\Responsable
 {
-  public $inmueble;
-  public $tarea;
-  public $supervisor;
+  public $usuario;
+  public $ordentrabajo;
   //public $nroorden;
     public function fields()
     {
@@ -45,7 +44,7 @@ class OrdentrabajoSearch extends \app\modules\apv1\models\Ordentrabajo
     {
         return [
             [['id'], 'integer'],
-            [['id','nro','inmueble','tarea','fecinicio','descripcion','archivo','supervisor'], 'safe'],
+            [['id','usuario','ordentrabajo'], 'safe'],
         ];
     }
 
@@ -68,16 +67,9 @@ class OrdentrabajoSearch extends \app\modules\apv1\models\Ordentrabajo
      */
     public function search($params)
     {
-        $query = Ordentrabajo::find();
-    //    $query->join('LEFT JOIN', 'post', 'post.user_id = user.id');
-        $query->leftJoin( 'tarea', 'ordentrabajo.id_tarea= tarea.id' );
-        $query->leftJoin( 'inmueble', 'ordentrabajo.id_inmueble= inmueble.id' );
-          $query->innerJoin( 'user', 'public.ordentrabajo.id_supervisor= public.user.id' );
-        //$query->joinLeft('tarea');
-        //$query->joinWith('');
-      //  $query->joinLeft('inmueble');
-//        $query->joinWith('comments');
-
+        $query = Responsable::find();
+        $query->innerJoin( 'user', 'public.responsable.id_usuario= public.user.id' );
+        $query->innerJoin( 'ordentrabajo', 'responsable.id_ordentrabajo= ordentrabajo.id' );
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -94,12 +86,8 @@ class OrdentrabajoSearch extends \app\modules\apv1\models\Ordentrabajo
 
         // grid filtering conditions
         $query->andFilterWhere(['id' => $this->id]);
-
-        $query->andFilterWhere(['like','inmueble.nombre',$this->inmueble]);
-        $query->andFilterWhere(['like','tarea.nombre',$this->tarea]);
-        $query->andFilterWhere(['like','user.username',$this->supervisor]);
-        $query->andFilterWhere(['like','fecinicio',$this->fecinicio]);
-        $query->andFilterWhere(['like','descripcion',$this->descripcion]);
+        $query->andFilterWhere(['like','user.username',$this->usuario]);
+        $query->andFilterWhere(['like','ordentrabajo.nro',$this->ordentrabajo]);
 
 
 
