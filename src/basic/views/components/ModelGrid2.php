@@ -51,6 +51,9 @@
                 <td>
                     <button v-on:click="deleteModel(model[modelfields[0]])" type="button" class="btn btn-danger">Borrar</button>
                 </td>
+                <td>
+                    <button v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Upload</button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -150,6 +153,10 @@
             NewModel: function () {
                 var self = this; // nos re envia a la vista que crea obejeto del modelo
                 window.location.href = '/'+self.modelname+'/create';
+            },
+            archivoModel: function (key) {
+                var self = this; // nos re envia a la vista que crea obejeto del modelo
+                window.location.href = '/'+self.modelname+'/archivo?id='+key;
             }
 
 

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * OrdentrabajoController implements the CRUD actions for Ordentrabajo model.
@@ -77,6 +78,38 @@ class OrdentrabajoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    public function actionArchivo($id)
+    {
+      $model = $this->findModel($id);
+      if ($model->load(Yii::$app->request->post())) {
+            $model->archivo = UploadedFile::getInstance($model, 'archivo');
+            //var_dump(  $model->archivo);
+          }
+      if ($model->archivo) {
+        $a=Yii::getAlias('@app');
+
+        $ruta=$a.'/web/ordentrabajo/'. $model->archivo->baseName . '.' . $model->archivo->extension;
+        $model->archivo->saveAs($ruta);
+        $model->archivo='/ordentrabajo/'. $model->archivo->baseName . '.' . $model->archivo->extension;
+        //var_dump($model->archivo);
+          if ( $model->save()) {
+          //  var_dump($model);
+              return $this->redirect(['view', 'id' => $model->id]);
+          }
+
+        }
+
+      return $this->render('archivo', [
+          'model' => $model,
+      ]);
+    }
+
+
+
+
+
+
+
 
     /**
      * Creates a new Ordentrabajo model.
@@ -88,6 +121,8 @@ class OrdentrabajoController extends Controller
       $model = new Ordentrabajo();
 
        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+
            return $this->redirect(['view', 'id' => $model->id]);
        }
        $hoy = date("Y");

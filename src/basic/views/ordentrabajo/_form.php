@@ -88,13 +88,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     <span class="text-danger" v-if="errors.descripcion" >{{errors.descripcion}}</span>
   </div>
 
-  <div class="form-group">
-    <label for="archivo">Archivo :</label>
-    <input v-bind:placeholder="archivo_hint" class="form-control" id="nro" v-model="archivo" type="file" name="archivo" required >
-    <span class="text-danger" v-if="errors.archivo" >{{errors.archivo}}</span>
-  </div>
-
-
 
     <div class="row">
 		<div class="col-md-2">
