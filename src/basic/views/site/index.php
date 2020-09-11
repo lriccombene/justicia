@@ -1,53 +1,79 @@
 <?php
 
+
+use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\helpers\Html;
+$this->title = 'My Yii Application';
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Ordenes Asignadas</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+<div class="row">
+    <div class="col-md-12">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        <table class='table table-bordered table-striped'>
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        NRo
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                    <th>
+                        Tarea
+                    </th>
+                    <th>
+                        Inmueble
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <?php
+            $municipio='';
+            var_dump($model);
+            if ($model<>''){
+                foreach ($model as $nombre ) {
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                            echo "<tr >";
+                            echo "<td >";print_r( $nombre->id);"</td>";
+                            echo "<td>";print_r( $nombre->nro);"</td>";
+                            echo "<td>";print_r( $nombre->descripcion);"</td>";
+                            echo "<td>";print_r( $nombre->tarea->nombre);"</td>";
+                            echo "<td>";print_r( $nombre->inmueble->nombre);"</td>";
+                          //  echo "<td>";print_r( $nombre->ordendetalle->estado);"</td>";
+                            echo "<td><a id ='boton'  href='/ordendetalle/create' type='button' class='btn btn-primary' >Tomar Orden</a></td>";
+                            echo "</tr>";
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                }
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
+                        }?>
+
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+
 
     </div>
 </div>

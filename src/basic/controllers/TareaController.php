@@ -34,7 +34,7 @@ class TareaController extends Controller
                  'rules' => [ //Definir politicas de acceso
                      [
                          'allow' => true,
-                         'roles' => ['admin', 'administrativo'], //El Rol admin y administrativo pueden acceder a todas las acciones
+                         'roles' => ['admin',  'supervisor'], //El Rol admin y administrativo pueden acceder a todas las acciones
                      ],
                      [
                          'allow' => true,

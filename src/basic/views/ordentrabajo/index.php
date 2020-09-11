@@ -14,7 +14,10 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
 echo $this->render('/components/ModelGrid2');
 ?>
 
+<div 
+    <h1>Ordenes de trabajo emitidas</h1>
 
+</div>
 
 <div id="app">
     <crud

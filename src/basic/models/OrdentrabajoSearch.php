@@ -41,7 +41,9 @@ class OrdentrabajoSearch extends Ordentrabajo
     public function search($params)
     {
         $query = Ordentrabajo::find();
-
+        $query->leftJoin( 'tarea', 'ordentrabajo.id_tarea= tarea.id' );
+        $query->leftJoin( 'inmueble', 'ordentrabajo.id_inmueble= inmueble.id' );
+          $query->innerJoin( 'user', 'public.ordentrabajo.id_supervisor= public.user.id' );
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -59,15 +61,49 @@ class OrdentrabajoSearch extends Ordentrabajo
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_supervisor' => $this->id_supervisor,
-            'id_inmueble' => $this->id_inmueble,
-            'id_tarea' => $this->id_tarea,
             'fecinicio' => $this->fecinicio,
         ]);
 
-        $query->andFilterWhere(['ilike', 'nro', $this->nro])
-            ->andFilterWhere(['ilike', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['ilike', 'archivo', $this->archivo]);
+        $query->andFilterWhere(['like','inmueble.nombre',$this->inmueble]);
+        $query->andFilterWhere(['like','tarea.nombre',$this->tarea]);
+        $query->andFilterWhere(['like','public.user.username',$this->supervisor]);
+        $query->andFilterWhere(['like','fecinicio',$this->fecinicio]);
+        $query->andFilterWhere(['like','descripcion',$this->descripcion]);
+
+        return $dataProvider;
+    }
+    public function search2($params,$id)
+    {
+        $query = Ordentrabajo::find();
+        $query->leftJoin( 'tarea', 'ordentrabajo.id_tarea= tarea.id' );
+        $query->leftJoin( 'inmueble', 'ordentrabajo.id_inmueble= inmueble.id' );
+          $query->innerJoin( 'user', 'public.ordentrabajo.id_supervisor= public.user.id' )
+                ->leftJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
+                  ->where(['responsable.id_usuario' => $id])
+                  ->all();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params,'');
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'fecinicio' => $this->fecinicio,
+        ]);
+
+        $query->andFilterWhere(['like','inmueble.nombre',$this->inmueble]);
+        $query->andFilterWhere(['like','tarea.nombre',$this->tarea]);
+        $query->andFilterWhere(['like','public.user.username',$this->supervisor]);
+        $query->andFilterWhere(['like','fecinicio',$this->fecinicio]);
+        $query->andFilterWhere(['like','descripcion',$this->descripcion]);
 
         return $dataProvider;
     }

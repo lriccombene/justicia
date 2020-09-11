@@ -9,8 +9,11 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Ordentrabajo;
+use app\models\OrdentrabajoSearch;
+use app\models\Responsable;
 
-
+use yii\data\ActiveDataProvider;
 class SiteController extends Controller
 {
     /**
@@ -62,9 +65,43 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
+      $searchModel='';
+       $dataProvider='';
+       $model='';
 
+      if (!Yii::$app->user->isGuest) {
+
+             $id =Yii::$app->user->identity->id;
+
+             $model = Ordentrabajo::find()
+                     ->innerJoin( 'ordendetalle', 'ordendetalle.id_ordentrabajo= ordentrabajo.id' )
+                     ->innerJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
+
+                     ->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
+                     ->where(['responsable.id_usuario' => $id])
+                     ->all();
+
+              /*       $query = Ordentrabajo::find()
+                             ->leftJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
+                             ->where(['responsable.id_usuario' => $id])
+                             ->all();
+                     $dataProvider = new ActiveDataProvider([
+                               'query' => $query,
+                             ]);
+*/
+                     $searchModel = new OrdentrabajoSearch();
+                      $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$id);
+
+
+                           return $this->render('index', [
+                                        'model' => $model, 'searchModel' => $searchModel,
+                         'dataProvider' => $dataProvider,
+                                    ]);
+      }else{
+        return  $this->redirect(array('/user/login'));
+      }
+
+    }
     /**
      * Login action.
      *

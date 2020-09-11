@@ -59,6 +59,9 @@ use app\assets\AppAsset;
             ['label' => 'Tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
             ['label' => 'Inmueble', 'url' => ['/inmueble/index'],'visible'=>!Yii::$app->user->isGuest],
             ['label' => 'Tipo Estado', 'url' => ['/tipoestado/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Orden Trabajo', 'url' => ['/ordentrabajo/index'],'visible'=>!Yii::$app->user->isGuest],
+            ['label' => 'Orden Detalle', 'url' => ['/ordendetalle/index'],'visible'=>!Yii::$app->user->isGuest],
+
             ['label' => 'Usuarios', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin')],
             ['label' => 'Mi Perfil', 'url' => ['/user/settings/account'], 'visible' => !Yii::$app->user->isGuest],
 

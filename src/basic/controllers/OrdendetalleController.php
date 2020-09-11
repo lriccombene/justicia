@@ -33,7 +33,7 @@ class OrdendetalleController extends Controller
                  'rules' => [ //Definir politicas de acceso
                      [
                          'allow' => true,
-                         'roles' => ['admin', 'administrativo'], //El Rol admin y administrativo pueden acceder a todas las acciones
+                         'roles' => ['admin',  'supervisor','operario'], //El Rol admin y administrativo pueden acceder a todas las acciones
                      ],
                      [
                          'allow' => true,
@@ -51,13 +51,16 @@ class OrdendetalleController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrdendetalleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if (Yii::$app->user->isGuest) {
+           return $this->goHome();
+       }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+       $model = new Ordendetalle();
+
+       return $this->render('index',[
+           'model'=>$model,
+       ]);
+
     }
 
     /**
@@ -81,7 +84,8 @@ class OrdendetalleController extends Controller
     public function actionCreate()
     {
         $model = new Ordendetalle();
-
+        $model->id_usuario= $id =Yii::$app->user->identity->id;
+      //  var_dump($model->id_usuario);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

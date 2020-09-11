@@ -10,9 +10,9 @@ use app\models\Ordertrabajo;
 /* @var $model app\models\Normativas */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="normativas-form">
 
+    <h1>Orden de Trabajo <?php  echo $model->nro;  ?></h1>
     <?php $form = ActiveForm::begin(); ?>
 
       <?= $form->field($model, 'archivo')->fileInput() ?>
