@@ -77,6 +77,7 @@ class SiteController extends Controller
             $model = Ordentrabajo::find()
                     ->leftJoin( 'ordendetalle', ' ordentrabajo.id= ordendetalle.id_ordentrabajo' )
                      ->innerJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
+                     //->leftJoin( 'public.user', 'responsable.id_usuario= public.user.id' )
                      //->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
                      ->where(['responsable.id_usuario' => $id])
                     ->orderBy(['ordentrabajo.fecinicio' => SORT_ASC])

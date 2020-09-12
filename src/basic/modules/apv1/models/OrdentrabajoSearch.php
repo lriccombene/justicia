@@ -100,6 +100,7 @@ class OrdentrabajoSearch extends \app\modules\apv1\models\Ordentrabajo
         $query->andFilterWhere(['like','public.user.username',$this->supervisor]);
         $query->andFilterWhere(['like','fecinicio',$this->fecinicio]);
         $query->andFilterWhere(['like','descripcion',$this->descripcion]);
+        $query->andFilterWhere(['like','nro',$this->nro]);
 
 
 

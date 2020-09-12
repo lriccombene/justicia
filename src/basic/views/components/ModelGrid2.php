@@ -52,7 +52,7 @@
                     <button v-on:click="deleteModel(model[modelfields[0]])" type="button" class="btn btn-danger">Borrar</button>
                 </td>
                 <td>
-                    <button v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Upload</button>
+                    <button v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Cargar</button>
                 </td>
             </tr>
             </tbody>

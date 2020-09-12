@@ -56,10 +56,10 @@ use app\assets\AppAsset;
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Tarea', 'url' => ['/tarea/index'],'visible'=>!Yii::$app->user->isGuest],
-            ['label' => 'Inmueble', 'url' => ['/inmueble/index'],'visible'=>!Yii::$app->user->isGuest],
-            ['label' => 'Tipo Estado', 'url' => ['/tipoestado/index'],'visible'=>!Yii::$app->user->isGuest],
-            ['label' => 'Orden Trabajo', 'url' => ['/ordentrabajo/index'],'visible'=>!Yii::$app->user->isGuest],
+             ['label' => 'Tarea', 'url' => ['/tarea/index'], 'visible' => Yii::$app->user->can('supervisor')],
+            ['label' => 'Inmueble', 'url' => ['/inmueble/index'],'visible' => Yii::$app->user->can('supervisor')],
+            ['label' => 'Tipo Estado', 'url' => ['/tipoestado/index'],'visible' => Yii::$app->user->can('supervisor')],
+            ['label' => 'Orden Trabajo', 'url' => ['/ordentrabajo/index'],'visible' => Yii::$app->user->can('supervisor')],
             ['label' => 'Orden Detalle', 'url' => ['/ordendetalle/index'],'visible'=>!Yii::$app->user->isGuest],
 
             ['label' => 'Usuarios', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin')],
