@@ -31,7 +31,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                   {{ option.nombre }}
           </option>
       </select>
-      <span class="text-danger" v-if="errors.id_consultor" >{{errors.id_tipoestado}}</span>
+      <span class="text-danger" v-if="errors.id_tipoestado" >{{errors.id_tipoestado}}</span>
 
     </div>
    <div class="form-group">
@@ -69,7 +69,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
               {{ option.nro }}
       </option>
   </select>
-  <span class="text-danger" v-if="errors.id_consultor" >{{errors.id_ordentrabajo}}</span>
+  <span class="text-danger" v-if="errors.id_ordentrabajo" >{{errors.id_ordentrabajo}}</span>
 
 </div>
 
@@ -88,14 +88,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                     el:'#app',
                     data:{
                         id:'<?php  echo ($model->id); ?>',
-
                         fecinicio:'<?php  echo ($model->fecinicio); ?>',
                         fecinicio_hint: 'ingrese fecha inicio',
                         fecfinal:'<?php  echo ($model->fecfinal); ?>',
                         fecfinal_hint: 'ingrese fecha inicio',
                         observaciones:'<?php  echo ($model->observaciones); ?>',
                         observaciones_hint: 'ingrese observaciones',
-
                     //    referente:'<?php // echo ($model->contacto); ?>',
                     //    referente_hint: 'ingrese Referente',
                         tipoestados:[],
@@ -104,9 +102,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                         selected_usuario: '<?php  echo ($model->id_usuario); ?>',
                         ordentrabajos:[],
                         selected_ordentrabajo: '<?php  echo ($model->id_ordentrabajo); ?>',
-
                         errors: {}
-
                     },
                     mounted() {
                         this.getUsuarios();
@@ -183,43 +179,17 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            const params = new URLSearchParams();
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
-                           params.append('descripcion', self.descripcion);
-                           params.append('archivo', self.archivo);
-                           params.append('id_tarea', self.selected_tarea);
-                           params.append('id_inmueble', self.selected_inmueble);
-                           params.append('id_supervisor', self.selected_supervisor);
+                           params.append('fecfinal', self.fecfinal);
+                           params.append('observaciones', self.observaciones);
+                           params.append('id_tipoestado', self.selected_tipoestado);
+                           params.append('id_ordentrabajo', self.selected_ordentrabajo);
+                           params.append('id_usuario', self.selected_usuario);
                           // params.append('responsables', self.responsables);
-                           axios.post('/apv1/ordentrabajo',params)
+                           axios.post('/apv1/ordendetalle',params)
                               .then(function (response) {
                                   // handle success
                                   console.log(response.data);
-
-
-                                  for ( var prop in self.responsables) {
-                                      //item.id
-                                      //alert(self.responsables[prop].id+ '----'+ response.data.id);
-                                      const params2 = new URLSearchParams();
-                                      params2.append('id_ordentrabajo', response.data.id);
-                                      params2.append('id_usuario', self.responsables[prop].id);
-
-                                    // alert(params2);
-                                     // params.append('responsables', self.responsables);
-                                      axios.post('/apv1/responsable',params2)
-                                         .then(function (response2) {
-
-                                        //  alert(response2.data.id);
-                                         })
-                                         .catch(function (error2) {
-                                             // handle error
-                                             //alert(error2.response.data);
-                                             self.errors = self.normalizeErrors(error.response.data);
-                                         })
-                                         .then(function () {
-                                             // always executed
-                                         });
-                                  }
                                   alert('Los datos fueron guardados');
-
                               })
                               .catch(function (error) {
                                   // handle error
@@ -246,13 +216,13 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            const params = new URLSearchParams();
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
-                           params.append('descripcion', self.descripcion);
-                           params.append('archivo', self.archivo);
-                           params.append('id_tarea', self.selected_tarea);
-                           params.append('id_inmueble', self.selected_inmueble);
-                           params.append('id_consultor', self.selected_consultor);
+                           params.append('fecfinal', self.fecfinal);
+                           params.append('observaciones', self.observaciones);
+                           params.append('id_tipoestado', self.selected_tipoestado);
+                           params.append('id_ordentrabajo', self.selected_ordentrabajo);
+                           params.append('id_usuario', self.selected_usuario);
                           // alert(params);
-                           axios.patch('/apv1/ordentrabajo'+'/'+id,params)
+                           axios.patch('/apv1/ordendetalle'+'/'+id,params)
                               .then(function (response) {
                                   // handle success
                                   console.log(response.data);

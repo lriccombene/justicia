@@ -50,7 +50,7 @@ AppAsset::register($this);
 
 
     NavBar::begin([
-        'brandLabel' => "Sistema SEPYDS",
+        'brandLabel' => "Sistema Justicia 2020",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

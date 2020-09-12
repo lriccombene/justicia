@@ -71,7 +71,7 @@ class Ordentrabajo extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery|OrdendetalleQuery
      */
-    public function getOrdendetalles()
+    public function getOrdendetalle()
     {
         return $this->hasMany(Ordendetalle::className(), ['id_ordentrabajo' => 'id']);
     }

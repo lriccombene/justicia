@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Ordentrabajo;
+use app\models\Ordendetalle;
 use app\models\OrdentrabajoSearch;
 use app\models\Responsable;
 
@@ -73,14 +74,23 @@ class SiteController extends Controller
 
              $id =Yii::$app->user->identity->id;
 
-             $model = Ordentrabajo::find()
-                     ->innerJoin( 'ordendetalle', 'ordendetalle.id_ordentrabajo= ordentrabajo.id' )
+            $model = Ordentrabajo::find()
+                    ->leftJoin( 'ordendetalle', ' ordentrabajo.id= ordendetalle.id_ordentrabajo' )
                      ->innerJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
-
-                     ->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
+                     //->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
                      ->where(['responsable.id_usuario' => $id])
+                    ->orderBy(['ordentrabajo.fecinicio' => SORT_ASC])
                      ->all();
+                  //   var_dump($model);
 
+        /*    $model = Ordendetalle::find()
+                             ->innerJoin( 'ordentrabajo', ' ordentrabajo.id= ordendetalle.id_ordentrabajo' )
+                            // ->innerJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
+                            // ->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
+                            // ->where(['responsable.id_usuario' => $id])
+                            // ->orderBy(['ordentrabajo.fecinicio' => SORT_ASC])
+                             ->all();
+*/
               /*       $query = Ordentrabajo::find()
                              ->leftJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
                              ->where(['responsable.id_usuario' => $id])
@@ -91,7 +101,7 @@ class SiteController extends Controller
 */
                      $searchModel = new OrdentrabajoSearch();
                       $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$id);
-
+  //var_dump($model);
 
                            return $this->render('index', [
                                         'model' => $model, 'searchModel' => $searchModel,

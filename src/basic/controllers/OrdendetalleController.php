@@ -86,6 +86,13 @@ class OrdendetalleController extends Controller
         $model = new Ordendetalle();
         $model->id_usuario= $id =Yii::$app->user->identity->id;
       //  var_dump($model->id_usuario);
+
+      $request = Yii::$app->request;
+      $id_orden = $request->get('id_ordentrabajo');
+      //var_dump($id_orden);
+      if($id_orden<>NULL){
+        $model->id_ordentrabajo=$id_orden;
+      }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
