@@ -14,7 +14,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
 echo $this->render('/components/ModelGrid');
 ?>
 
-
+  <h1 class="text-capitalize">Tipo Estado</h1>
 <div id="app">
     <crud
             v-bind:model="model"

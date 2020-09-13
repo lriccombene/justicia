@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ordendetalle */
 
-$this->title = 'Create Ordendetalle';
-$this->params['breadcrumbs'][] = ['label' => 'Ordendetalles', 'url' => ['index']];
+$this->title = 'Crear Detalle de orden';
+$this->params['breadcrumbs'][] = ['label' => 'Orden detalle', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ordendetalle-create">

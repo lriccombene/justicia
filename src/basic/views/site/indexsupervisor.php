@@ -63,6 +63,11 @@
                 foreach ($model as $nombre ) {
                   $estado='';
                   $tomado='';
+                  $fecfinal='';
+                  $horafinal='';
+                  $fecinicio='';
+                  $horainicio='';
+
                   $a='';
                   if($nombre->ordendetalle<>NULL){
                     //var_dump($nombre->ordendetalle[0]->id_usuario);

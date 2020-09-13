@@ -14,7 +14,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
 echo $this->render('/components/ModelGrid2');
 ?>
 
-<div 
+<div
     <h1>Ordenes de trabajo emitidas</h1>
 
 </div>
@@ -38,7 +38,7 @@ echo $this->render('/components/ModelGrid2');
             model: <?= json_encode($model->getAttributes()) ?>,
             //relates: <?//= json_encode($model->getRelationData()) ?>//,
             //rules: <?//= json_encode($model->rules()) ?>//,
-            fields: ['id','nro','inmueble','tarea','fecinicio','descripcion','supervisor'] , //poner en un array los campos que queres
+            fields: ['id','nro','inmueble','tarea','fecinicio','descripcion','supervisor','archivo'] , //poner en un array los campos que queres
             modelname: <?= json_encode($model::tableName())?>,
         }
     })

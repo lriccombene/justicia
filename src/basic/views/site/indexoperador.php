@@ -41,6 +41,9 @@
                     <th>
 
                     </th>
+                    <th>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +56,7 @@
                   $estado='';
 
                   if($nombre->ordendetalle<>NULL){
-                    //var_dump($nombre->ordendetalle[0]->id_tipoestado);
+                    //var_dump($nombre);
                     $estado=Yii::$app->db->createCommand("SELECT nombre FROM tipoestado WHERE id = ".$nombre->ordendetalle[0]->id_tipoestado)->queryScalar();
 
                   }
@@ -76,6 +79,13 @@
                               $id=$nombre->ordendetalle[0]->id_tipoestado;
                                 echo "<td><a id ='boton' onclick='funcOrdendetalle($id);' type='button' class='btn btn-warning' >Actualizar Orden</a></td>";
                             }
+                            if($nombre->archivo ===''){
+                                echo "<td></td>";
+                            }else{
+                              $id=$nombre->ordendetalle[0]->id_tipoestado;
+                                echo "<td><a href=$nombre->archivo  download='' type='button' class='btn btn-info'>Descargar</a></td>";
+                            }
+
                             echo "</tr>";
                             }
                         }?>

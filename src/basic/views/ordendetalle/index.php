@@ -10,6 +10,7 @@ $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['position'=>$this::POS_HEAD]);
 echo $this->render('/components/ModelGrid3');
 ?>
+  <h1 class="text-capitalize"> Detalle de orden</h1>
 <div id="app">
     <crud
             v-bind:model="model"

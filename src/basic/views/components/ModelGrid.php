@@ -2,7 +2,7 @@
     <div class="container">
     <p></p>
     <p></p>
-        <h1 class="text-capitalize">{{modelname}}</h1>
+      
         <!-- Button trigger modal -->
         <p></p>
         <p>

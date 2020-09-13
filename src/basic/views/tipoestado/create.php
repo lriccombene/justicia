@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tipoestado */
 
-$this->title = 'Create Tipoestado';
-$this->params['breadcrumbs'][] = ['label' => 'Tipoestados', 'url' => ['index']];
+$this->title = 'Crear Tipo Estado';
+$this->params['breadcrumbs'][] = ['label' => 'Tipo Estados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipoestado-create">

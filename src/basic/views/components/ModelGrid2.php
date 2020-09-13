@@ -24,6 +24,7 @@
                 <th v-for="field in modelfields">{{field}}</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             <tr>
                 <td></td>
@@ -41,8 +42,8 @@
                     <td v-for="field in modelfields">
                         <a v-if="model[field].nombre">{{model[field].nombre}}</a>
                         <a v-else-if="model[field].username">{{model[field].username}}</a>
-                        <a v-else>{{model[field]}}</a>
 
+                        <a v-else>{{model[field]}}</a>
 
                     </td>
                 <td>
@@ -52,7 +53,9 @@
                     <button v-on:click="deleteModel(model[modelfields[0]])" type="button" class="btn btn-danger">Borrar</button>
                 </td>
                 <td>
-                    <button v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Cargar</button>
+
+                    <button v-if='!model[modelfields[7]]' v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Cargar</button>
+                    <a v-else  v-bind:href='model[modelfields[7]]'  download type="button" class="btn btn-info">Descargar</a>
                 </td>
             </tr>
             </tbody>
