@@ -8,4 +8,4 @@ themes/classic/views/
 postgressqldata/*
 src/composer/*
 .vscode
-docker-compose.yml
+#docker-compose.yml

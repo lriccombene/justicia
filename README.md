@@ -8,7 +8,7 @@ Softeware Libre Tecnologias requeridas
 
 1.Docker
 2.Docker-compose
-3.Mysql
+3.Postgresql
 4.Php 7.x
 5.Yii2
 6. S.o Cualquiera de software libre "en este caso lo voy armar con Ubuntu 18 distribucion MATE"
@@ -23,7 +23,7 @@ Referencia 2 :https://docs.docker.com/compose/install/
 
 2. clono del repo el proyecto
 
-git clone https://github.com/lriccombene/fei2020.git
+git clone https://github.com/lriccombene/justicia.git
 
 
 3.Creo mi Docker Yml de en base a dist.yml pre existente
