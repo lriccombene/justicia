@@ -79,7 +79,7 @@ class SiteController extends Controller
                      ->innerJoin( 'responsable', 'ordentrabajo.id= responsable.id_ordentrabajo' )
                      //->leftJoin( 'public.user', 'responsable.id_usuario= public.user.id' )
                      //->innerJoin( 'tipoestado', 'ordendetalle.id_tipoestado= tipoestado.id' )
-                     ->where(['responsable.id_usuario' => $id])
+                     //->where(['responsable.id_usuario' => $id])
                     ->orderBy(['ordentrabajo.fecinicio' => SORT_ASC])
                      ->all();
                   //   var_dump($model);

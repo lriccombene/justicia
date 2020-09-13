@@ -39,6 +39,15 @@
                       Fec Inicio
                     </th>
                     <th>
+                      Hora Inicio
+                    </th>
+                    <th>
+                      Fec Final
+                    </th>
+                    <th>
+                      Hora Final
+                    </th>
+                    <th>
                         Estado
                     </th>
 
@@ -60,7 +69,10 @@
                     $estado=Yii::$app->db->createCommand("SELECT nombre FROM tipoestado WHERE id = ".$nombre->ordendetalle[0]->id_tipoestado)->queryScalar();
                     $tomado=   User::find()->where(['id' =>$nombre->ordendetalle[0]->id_usuario])->one();
                     $tomado=$tomado->username;
-                    $a=$nombre->ordendetalle[0]->fecinicio;
+                    $fecinicio=$nombre->ordendetalle[0]->fecinicio;
+                    $horainicio=$nombre->ordendetalle[0]->horainicio;
+                    $fecfinal=$nombre->ordendetalle[0]->fecfinal;
+                    $horafinal=$nombre->ordendetalle[0]->horafinal;
                     //$a= User::find()->All()
                   }
                   //  var_dump($tomado);
@@ -75,7 +87,10 @@
                             echo "<td>";print_r( $nombre->tarea->nombre);"</td>";
                             echo "<td>";print_r( $nombre->inmueble->nombre);"</td>";
                             echo "<td>";print_r($tomado);"</td>";
-                            echo "<td>";print_r($a);"</td>";
+                            echo "<td>";print_r($fecinicio);"</td>";
+                            echo "<td>";print_r($horainicio);"</td>";
+                            echo "<td>";print_r($fecfinal);"</td>";
+                            echo "<td>";print_r($horafinal);"</td>";
                             echo "<td>";print_r( $estado);"</td>";
 
                             echo "</tr>";

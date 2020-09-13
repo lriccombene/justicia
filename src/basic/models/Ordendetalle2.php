@@ -11,9 +11,7 @@ use Yii;
  * @property int $id_tipoestado
  * @property int $id_usuario
  * @property string|null $fecinicio
- * @property string|null $horainicio
  * @property string|null $fecfinal
- * @property string|null $horafinal
  * @property string|null $observaciones
  * @property int $id_ordentrabajo
  *
@@ -40,7 +38,7 @@ class Ordendetalle extends \yii\db\ActiveRecord
             [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'required'],
             [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'default', 'value' => null],
             [['id_tipoestado', 'id_usuario', 'id_ordentrabajo'], 'integer'],
-            [['fecinicio', 'horainicio', 'fecfinal', 'horafinal'], 'safe'],
+            [['fecinicio', 'fecfinal'], 'safe'],
             [['observaciones'], 'string', 'max' => 255],
             [['id_ordentrabajo'], 'exist', 'skipOnError' => true, 'targetClass' => Ordentrabajo::className(), 'targetAttribute' => ['id_ordentrabajo' => 'id']],
             [['id_tipoestado'], 'exist', 'skipOnError' => true, 'targetClass' => Tipoestado::className(), 'targetAttribute' => ['id_tipoestado' => 'id']],
@@ -58,9 +56,7 @@ class Ordendetalle extends \yii\db\ActiveRecord
             'id_tipoestado' => 'Id Tipoestado',
             'id_usuario' => 'Id Usuario',
             'fecinicio' => 'Fecinicio',
-            'horainicio' => 'Horainicio',
             'fecfinal' => 'Fecfinal',
-            'horafinal' => 'Horafinal',
             'observaciones' => 'Observaciones',
             'id_ordentrabajo' => 'Id Ordentrabajo',
         ];

@@ -10,7 +10,7 @@ use yii\db\Migration;
  * - `{{%user}}`
  * - `{{%ordentrabajo}}`
  */
-class m200906_141230_create_ordendetalle_table extends Migration
+class m200912_235952_create_ordendetalle_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,9 @@ class m200906_141230_create_ordendetalle_table extends Migration
             'id_tipoestado' => $this->integer()->notNull(),
             'id_usuario' => $this->integer()->notNull(),
             'fecinicio' => $this->date(),
+            'horainicio' => $this->time(),
             'fecfinal' => $this->date(),
+            'horafinal' => $this->time(),
             'observaciones' => $this->string(),
             'id_ordentrabajo' => $this->integer()->notNull(),
         ]);

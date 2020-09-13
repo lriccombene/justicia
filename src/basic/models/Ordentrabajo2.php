@@ -13,7 +13,6 @@ use Yii;
  * @property int $id_inmueble
  * @property int $id_tarea
  * @property string|null $fecinicio
- * @property string|null $horainicio
  * @property string|null $descripcion
  * @property string|null $archivo
  *
@@ -21,6 +20,7 @@ use Yii;
  * @property Inmueble $inmueble
  * @property Tarea $tarea
  * @property User $supervisor
+ * @property Responsable[] $responsables
  */
 class Ordentrabajo extends \yii\db\ActiveRecord
 {
@@ -41,7 +41,7 @@ class Ordentrabajo extends \yii\db\ActiveRecord
             [['nro', 'id_supervisor', 'id_inmueble', 'id_tarea'], 'required'],
             [['id_supervisor', 'id_inmueble', 'id_tarea'], 'default', 'value' => null],
             [['id_supervisor', 'id_inmueble', 'id_tarea'], 'integer'],
-            [['fecinicio', 'horainicio'], 'safe'],
+            [['fecinicio'], 'safe'],
             [['nro', 'descripcion', 'archivo'], 'string', 'max' => 255],
             [['id_inmueble'], 'exist', 'skipOnError' => true, 'targetClass' => Inmueble::className(), 'targetAttribute' => ['id_inmueble' => 'id']],
             [['id_tarea'], 'exist', 'skipOnError' => true, 'targetClass' => Tarea::className(), 'targetAttribute' => ['id_tarea' => 'id']],
@@ -61,7 +61,6 @@ class Ordentrabajo extends \yii\db\ActiveRecord
             'id_inmueble' => 'Id Inmueble',
             'id_tarea' => 'Id Tarea',
             'fecinicio' => 'Fecinicio',
-            'horainicio' => 'Horainicio',
             'descripcion' => 'Descripcion',
             'archivo' => 'Archivo',
         ];
@@ -97,6 +96,10 @@ class Ordentrabajo extends \yii\db\ActiveRecord
         return $this->hasOne(Tarea::className(), ['id' => 'id_tarea']);
     }
 
+    public function getNro()
+    {
+        return 1111111;
+    }
     /**
      * Gets query for [[Supervisor]].
      *
@@ -105,6 +108,16 @@ class Ordentrabajo extends \yii\db\ActiveRecord
     public function getSupervisor()
     {
         return $this->hasOne(User::className(), ['id' => 'id_supervisor']);
+    }
+
+    /**
+     * Gets query for [[Responsables]].
+     *
+     * @return \yii\db\ActiveQuery|ResponsableQuery
+     */
+    public function getResponsables()
+    {
+        return $this->hasMany(Responsable::className(), ['id_ordentrabrajo' => 'id']);
     }
 
     /**

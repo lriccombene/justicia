@@ -1,1 +1,1 @@
-sudo bin/yii.sh migrate/create create_ordentrabajo_table --fields="nro:string:notNull,id_supervisor:integer:notNull:foreignKey(user),id_inmueble:integer:notNull:foreignKey(inmueble),id_tarea:integer:notNull:foreignKey(tarea),fecinicio:date,descripcion:string,archivo:string"
+sudo bin/yii.sh migrate/create create_ordentrabajo_table --fields="nro:string:notNull,id_supervisor:integer:notNull:foreignKey(user),id_inmueble:integer:notNull:foreignKey(inmueble),id_tarea:integer:notNull:foreignKey(tarea),fecinicio:date,horainicio:time,descripcion:string,archivo:string"

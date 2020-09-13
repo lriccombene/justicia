@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ordentrabajo */
 
-$this->title = 'Create Ordentrabajo';
+$this->title = 'Crear Orden Trabajo';
 $this->params['breadcrumbs'][] = ['label' => 'Ordentrabajos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

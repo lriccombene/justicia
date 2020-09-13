@@ -10,7 +10,7 @@ use yii\db\Migration;
  * - `{{%inmueble}}`
  * - `{{%tarea}}`
  */
-class m200906_141219_create_ordentrabajo_table extends Migration
+class m200912_235125_create_ordentrabajo_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -24,6 +24,7 @@ class m200906_141219_create_ordentrabajo_table extends Migration
             'id_inmueble' => $this->integer()->notNull(),
             'id_tarea' => $this->integer()->notNull(),
             'fecinicio' => $this->date(),
+            'horainicio' => $this->time(),
             'descripcion' => $this->string(),
             'archivo' => $this->string(),
         ]);

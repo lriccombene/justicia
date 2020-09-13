@@ -21,6 +21,9 @@
                         Fecha Inicio
                     </th>
                     <th>
+                        Hora Inicio
+                    </th>
+                    <th>
                         NRo
                     </th>
                     <th>
@@ -48,6 +51,7 @@
             if ($model<>''){
                 foreach ($model as $nombre ) {
                   $estado='';
+
                   if($nombre->ordendetalle<>NULL){
                     //var_dump($nombre->ordendetalle[0]->id_tipoestado);
                     $estado=Yii::$app->db->createCommand("SELECT nombre FROM tipoestado WHERE id = ".$nombre->ordendetalle[0]->id_tipoestado)->queryScalar();
@@ -60,6 +64,7 @@
                             echo "<tr >";
                             echo "<td >";print_r( $nombre->id);"</td>";
                             echo "<td >";print_r( $nombre->fecinicio);"</td>";
+                            echo "<td >";print_r( $nombre->horainicio);"</td>";
                             echo "<td>";print_r( $nombre->nro);"</td>";
                             echo "<td>";print_r( $nombre->descripcion);"</td>";
                             echo "<td>";print_r( $nombre->tarea->nombre);"</td>";

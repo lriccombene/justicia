@@ -6,7 +6,7 @@ class Ordentrabajo extends \app\models\Ordentrabajo
 {
     public function fields (){
 
-        return ['id','nro','inmueble','tarea','fecinicio','descripcion','supervisor'];
+        return ['id','nro','inmueble','tarea','fecinicio','horainicio','descripcion','supervisor'];
 
     }
 }

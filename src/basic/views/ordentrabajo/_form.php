@@ -19,7 +19,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
   <div id="app" class="container-fluid">
     <div class="form-group">
       <label for="nro">Numero :</label>
-      <input v-bind:placeholder="nro_hint" class="form-control" id="nro" v-model="nro" type="text" name="nro" required >
+      <input v-bind:placeholder="nro_hint" class="form-control" id="nro" v-model="nro" type="text" name="nro" readonly >
       <span class="text-danger" v-if="errors.nro" >{{errors.nro}}</span>
 	 </div>
   <div class="form-group">
@@ -69,7 +69,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
         </option>
     </select>
     <span class="text-danger" v-if="errors.id_responsable" >{{errors.id_responsable}}</span>
-    <button v-on:click ="agregarResponsable"  type ="button"  class="btn btn-success">Agregar</button>
+    <button v-on:click ="agregarResponsable"  type ="button"  class="btn btn-secondary">Agregar</button>
   </div>
   <ul>
       <li v-for='responsable in responsables'>{{responsable.username}}</li>
@@ -83,6 +83,13 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
           <span class="text-danger" v-if="errors.fecinicio" >{{errors.fecinicio}}</span>
   </div>
   <div class="form-group">
+          <label for="horainicio">Hora Inicio :</label>
+          <input v-bind:placeholder="horainicio_hint" class="form-control" id="horainicio" v-model="horainicio" type="time" name="fecinicio">
+          <span class="text-danger" v-if="errors.horainicio" >{{errors.horainicio}}</span>
+  </div>
+
+
+  <div class="form-group">
     <label for="descripcion">Descripcion :</label>
     <input v-bind:placeholder="descripcion_hint" class="form-control" id="nro" v-model="descripcion" type="textarea" name="descrpcion" required >
     <span class="text-danger" v-if="errors.descripcion" >{{errors.descripcion}}</span>
@@ -91,7 +98,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
 
     <div class="row">
 		<div class="col-md-2">
-            <button v-if="!id"  v-on:click="add()"  type ="button"  class="btn btn-success">Enviar</button>
+            <button v-if="!id"  v-on:click="add()"  type ="button"  class="btn btn-success">Guardar</button>
             <button v-if="id" v-on:click ="edit(id)" type ="button" class="btn btn-warning" >Actualizar</button>
         </div>
     </div>
@@ -107,6 +114,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                         nro_hint: 'ingrese nro',
                         fecinicio:'<?php  echo ($model->fecinicio); ?>',
                         fecinicio_hint: 'ingrese fecha inicio',
+                        horainicio:'<?php  echo ($model->horainicio); ?>',
+                        horainicio_hint: 'ingrese fecha inicio',
                         descripcion:'<?php  echo ($model->descripcion); ?>',
                         descripcion: 'ingrese descripcion',
                         archivo:'<?php  //echo ($model->contacto); ?>',
@@ -200,6 +209,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            const params = new URLSearchParams();
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
+                           params.append('horainicio', self.horainicio);
                            params.append('descripcion', self.descripcion);
                            params.append('archivo', self.archivo);
                            params.append('id_tarea', self.selected_tarea);
@@ -263,6 +273,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            const params = new URLSearchParams();
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
+                           params.append('horainicio', self.horainicio);
                            params.append('descripcion', self.descripcion);
                            params.append('archivo', self.archivo);
                            params.append('id_tarea', self.selected_tarea);

@@ -6,7 +6,7 @@ class Ordendetalle extends \app\models\Ordendetalle
 {
     public function fields (){
 
-        return ['id','tipoestado','usuario','fecinicio','fecfinal','observaciones','ordentrabajo'];
+        return ['id','tipoestado','usuario','fecinicio','fecfinal','horainicio','horafinal','observaciones','ordentrabajo'];
 
     }
 }

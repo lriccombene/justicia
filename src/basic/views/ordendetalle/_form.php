@@ -23,6 +23,11 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
             <span class="text-danger" v-if="errors.fecinicio" >{{errors.fecinicio}}</span>
     </div>
     <div class="form-group">
+            <label for="horainicio">Hora Inicio :</label>
+            <input v-bind:placeholder="horainicio_hint" class="form-control" id="horainicio" v-model="horainicio" type="time" name="horainicio">
+            <span class="text-danger" v-if="errors.horainicio" >{{errors.horainicio}}</span>
+    </div>
+    <div class="form-group">
 
       <label for="tipoestados">Estado :</label>
 
@@ -53,13 +58,18 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
           <input v-bind:placeholder="fecfinal_hint" class="form-control" id="fecfinal" v-model="fecfinal" type="date" name="fecfinal">
           <span class="text-danger" v-if="errors.fecfinal" >{{errors.fecfinal}}</span>
   </div>
-  <div id="app" class="container-fluid">
+  <div class="form-group">
+          <label for="horafinal">Hora Final :</label>
+          <input v-bind:placeholder="horafinal_hint" class="form-control" id="horafinal" v-model="horafinal" type="time" name="horafinal">
+          <span class="text-danger" v-if="errors.horafinal" >{{errors.horafinal}}</span>
+  </div>
+
     <div class="form-group">
       <label for="observaciones">Observaciones :</label>
       <input v-bind:placeholder="observaciones_hint" class="form-control" id="observaciones" v-model="observaciones" type="text" name="observaciones" required >
       <span class="text-danger" v-if="errors.observaciones" >{{errors.observaciones}}</span>
    </div>
-</div>
+
 <div class="form-group">
 
   <label for="ordentrabajo">Orden Trabajo :</label>
@@ -92,6 +102,10 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                         fecinicio_hint: 'ingrese fecha inicio',
                         fecfinal:'<?php  echo ($model->fecfinal); ?>',
                         fecfinal_hint: 'ingrese fecha inicio',
+                        horainicio:'<?php  echo ($model->horainicio); ?>',
+                        horainicio_hint: 'ingrese hora inicio',
+                        horafinal:'<?php  echo ($model->horafinal); ?>',
+                        horafinal_hint: 'ingrese hora final',
                         observaciones:'<?php  echo ($model->observaciones); ?>',
                         observaciones_hint: 'ingrese observaciones',
                     //    referente:'<?php // echo ($model->contacto); ?>',
@@ -180,6 +194,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
                            params.append('fecfinal', self.fecfinal);
+                           params.append('horainicio', self.horainicio);
+                           params.append('horafinal', self.horafinal);
                            params.append('observaciones', self.observaciones);
                            params.append('id_tipoestado', self.selected_tipoestado);
                            params.append('id_ordentrabajo', self.selected_ordentrabajo);
@@ -217,6 +233,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                            params.append('nro', self.nro);
                            params.append('fecinicio', self.fecinicio);
                            params.append('fecfinal', self.fecfinal);
+                           params.append('horainicio', self.horainicio);
+                           params.append('horafinal', self.horafinal);
                            params.append('observaciones', self.observaciones);
                            params.append('id_tipoestado', self.selected_tipoestado);
                            params.append('id_ordentrabajo', self.selected_ordentrabajo);

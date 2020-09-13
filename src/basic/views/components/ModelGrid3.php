@@ -53,7 +53,7 @@
                     <button v-on:click="deleteModel(model[modelfields[0]])" type="button" class="btn btn-danger">Borrar</button>
                 </td>
                 <td>
-                    <a  v-bind:href="model[modelfields[6]].archivo"  download='' type="button" class="btn btn-info">{{model[modelfields[6]].archivo}}</a>
+                    <a v-if="model[modelfields[6]].archivo"  v-bind:href="model[modelfields[6]].archivo"  download='' type="button" class="btn btn-info">Descargar</a>
                 </td>
             </tr>
             </tbody>
