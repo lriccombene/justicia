@@ -51,12 +51,19 @@
             <?php
             $municipio='';
 
+
+
             if ($model<>''){
+
                 foreach ($model as $nombre ) {
+
                   $estado='';
 
+
                   if($nombre->ordendetalle<>NULL){
-                    //var_dump($nombre);
+                    //$key=0;
+                  //  var_dump($nombre->ordendetalle);
+                  //  var_dump($nombre->ordendetalle[0]->id);
                     $estado=Yii::$app->db->createCommand("SELECT nombre FROM tipoestado WHERE id = ".$nombre->ordendetalle[0]->id_tipoestado)->queryScalar();
 
                   }
@@ -72,21 +79,24 @@
                             echo "<td>";print_r( $nombre->descripcion);"</td>";
                             echo "<td>";print_r( $nombre->tarea->nombre);"</td>";
                             echo "<td>";print_r( $nombre->inmueble->nombre);"</td>";
-                            echo "<td>";print_r( $estado);"</td>";
+                          //  echo "<td>";print_r( $estado);"</td>";
                             if($estado===''){
                                 echo "<td><a id ='boton'  href='/ordendetalle/create?id_ordentrabajo=$nombre->id' type='button' class='btn btn-primary' >Tomar Orden</a></td>";
                             }else{
-                              $id=$nombre->ordendetalle[0]->id_tipoestado;
-                                echo "<td><a id ='boton' onclick='funcOrdendetalle($id);' type='button' class='btn btn-warning' >Actualizar Orden</a></td>";
+                              //$id=$nombre->ordendetalle[0]->id;
+                              //var_dump($nombre->ordendetalle[0]->id);
+                              $key=$nombre->ordendetalle[0]->id;
+                                echo "<td><a id ='boton' onclick='funcOrdendetalle($key);' type='button' class='btn btn-warning' >Actualizar Orden</a></td>";
                             }
                             if($nombre->archivo ===''){
                                 echo "<td></td>";
                             }else{
-                              $id=$nombre->ordendetalle[0]->id_tipoestado;
+                              //$id=$nombre->ordendetalle[0]->id_tipoestado;
                                 echo "<td><a href=$nombre->archivo  download='' type='button' class='btn btn-info'>Descargar</a></td>";
                             }
 
                             echo "</tr>";
+
                             }
                         }?>
 

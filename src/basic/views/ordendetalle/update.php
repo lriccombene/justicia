@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ordendetalle */
 
-$this->title = 'Update Ordendetalle: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Ordendetalles', 'url' => ['index']];
+$this->title = 'Actualizar Detalle de la Orden: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Detalle Orden', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

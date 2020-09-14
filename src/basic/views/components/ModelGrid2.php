@@ -37,26 +37,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(model,key) in models" v-bind:key="model[modelfields[0]]">
-                <td>{{key+1}}</td>
-                    <td v-for="field in modelfields">
-                        <a v-if="model[field].nombre">{{model[field].nombre}}</a>
-                        <a v-else-if="model[field].username">{{model[field].username}}</a>
+            <tr v-for="(model in models" v-bind:key="model[modelfields[0]]">
+              <td></td>
+                <td>{{model.id}}</td>
+                <td>{{model.nro}}</td>
+                <td>{{model.inmueble.nombre}}</td>
+                <td>{{model.tarea.nombre}}</td>
+                <td>{{model.fecinicio}}</td>
+                <td>{{model.descripcion}}</td>
+                <td>{{model.supervisor.username}}</td>
+                <td>
 
-                        <a v-else>{{model[field]}}</a>
-
-                    </td>
+                    <button v-if='!model[modelfields[7]]' v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Cargar</button>
+                    <a v-else  v-bind:href='model[modelfields[7]]'  download type="button" class="btn btn-info">Descargar</a>
+                </td>
                 <td>
                     <button v-on:click="editModel(model[modelfields[0]])" type="button" class="btn btn-warning">Editar</button>
                 </td>
                 <td>
                     <button v-on:click="deleteModel(model[modelfields[0]])" type="button" class="btn btn-danger">Borrar</button>
                 </td>
-                <td>
 
-                    <button v-if='!model[modelfields[7]]' v-on:click="archivoModel(model[modelfields[0]])" type="button" class="btn btn-info">Cargar</button>
-                    <a v-else  v-bind:href='model[modelfields[7]]'  download type="button" class="btn btn-info">Descargar</a>
-                </td>
             </tr>
             </tbody>
         </table>

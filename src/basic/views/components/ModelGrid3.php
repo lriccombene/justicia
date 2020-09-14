@@ -36,16 +36,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(model,key) in models" v-bind:key="model[modelfields[0]]">
-                <td>{{key+1}}</td>
-                    <td v-for="field in modelfields">
-                        <a v-if="model[field].nombre">{{model[field].nombre}}</a>
-                        <a v-else-if="model[field].username">{{model[field].username}}</a>
-                        <a v-else-if="model[field].nro">{{model[field].nro}}</a>
-                        <a v-else>{{model[field]}}</a>
+            <tr v-for="(model) in models" v-bind:key="model[modelfields[0]]">
+                <td></td>
+                  <td>{{model.id}}</td>
+                  <td>{{model.tipoestado.nombre}}</td>
+                  <td>{{model.usuario.username}}</td>
+                  <td>{{model.fecinicio}}</td>
+                  <td>{{model.fecfinal}}</td>
+                  <td>{{model.observaciones}}</td>
+                  <td>{{model.ordentrabajo.nro}}</td>
 
-
-                    </td>
                 <td>
                     <button v-on:click="editModel(model[modelfields[0]])" type="button" class="btn btn-warning">Editar</button>
                 </td>

@@ -1,37 +1,16 @@
 version: "3.1"
 
 services:
-  traefik:
-    image: "traefik:v2.2"
-    container_name: "traefik"
-    command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
-      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.myresolver.acme.email=lriccombene@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "./letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   db:
     image: postgres:9.5
     environment:
       POSTGRES_DB: justicia2020
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: grety54y!!45ygfUYTggH@
+      POSTGRES_PASSWORD: justicia2020
 
-    #ports:
-    #      - 5433:5432
+    ports:
+          - 5433:5432
     volumes:
             - ./postgressqldata:/var/lib/postgresql/data:delegated
 
@@ -55,17 +34,6 @@ services:
       PRODUCCION: 0
       PHP_ENABLE_XDEBUG: 1
       PHP_USER_ID: 1000
-    labels:
 
-      - "traefik.enable=true"
-      - "traefik.http.routers.apache2_router_http.rule=Host(`ambiente2020.ddns.net`)"
-      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.apache2_router_http.middlewares=https_redirect"
-      - "traefik.http.routers.apache2_router_https.rule=Host(`ambiente2020.ddns.net`)"
-      - "traefik.http.routers.apache2_router_https.tls"
-      - "traefik.http.routers.apache2_router_https.tls.certresolver=leresolver"
-
-      - "traefik.port=80"
-
-    #ports:
-    #  - 8000:80
+    ports:
+      - 8000:80
